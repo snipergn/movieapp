@@ -3,10 +3,7 @@ import NetflixLogo from "../Assets/netflixlogo.png";
 const Navbar = () => {
   return (
     <div className="App">
-      {
-        // Navbar
-      }
-      <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
           <img
             src={NetflixLogo}
@@ -51,7 +48,7 @@ const Navbar = () => {
           <ul class="navbar-nav">
             <li class="nav-item ">
               <a class="nav-link" href="#">
-                Sign Out
+                Sign Out 
               </a>
             </li>
           </ul>

@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import Navbar from './components/navbar/navbar';
+import Header from './components/mainpage/header.js';
 class App extends React.Component {
 
   render() {
@@ -24,6 +25,7 @@ class App extends React.Component {
       3. Database ?? (yet)
       */}
       <Navbar/>
+      <Header/>
     </div>
     );
   }
