@@ -1,42 +1,41 @@
 import "./header.css";
 import firstSlide from "../Assets/batman.jpg";
-import secondSlide from "../Assets/second.jpg";
 
 const Header = () => {
   return (
     <div>
       <div
-        id="carouselExampleControls"
+        id="carouselExampleSlidesOnly"
         class="carousel slide"
         data-ride="carousel"
       >
-        <div class="carousel-inner img-fluid">
-          <p className="h1 title-batman">Batman Movie</p>
-          <div class="carousel-item active">
-            <img class="d-block w-100 image" src={firstSlide} alt="First slide" />
-            <div class="carousel-content">
-              <p className="h1">Movie Title</p>
+        <div class="carousel-inner">
+          <div class="carousel-item item active">
+            <img class="d-block w-100" src={firstSlide} alt="First slide" />
+            <div className="carousel-caption">
+              <p className="h4">Name Movie</p>
+              <p className="p">Date Release </p>
             </div>
           </div>
         </div>
-        <a
-          class="carousel-control-prev"
-          href="#carouselExampleControls"
-          role="button"
-          data-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a
-          class="carousel-control-next"
-          href="#carouselExampleControls"
-          role="button"
-          data-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+        <div className="section">
+          <p className="h1 title"> Popular now </p>
+          <div className="image-div">
+          <img src={firstSlide} className="image" alt="image"/>
+          </div>
+        </div>
+        <div className="section-2">
+          <p className="h1 title "> Action SF & Fantasy</p>
+        </div>
+        <div className="section-3">
+          <p className="h1 title"> Blockbuster Movie</p>
+        </div>
+        <div className="section-4">
+          <p className="h1 title"> Documentary</p>
+        </div>
+        <div className="section-5">
+          <p className="h1 title">Action Movie </p>
+        </div>
       </div>
     </div>
   );
