@@ -1,5 +1,5 @@
-.img-fluid {
-    height: 25%;
+.img {
+    height: 700px;
     max-width: 100%;
 }
 
@@ -12,8 +12,3 @@
     margin-top: 4rem;
     margin-left: 4rem;
 }
-.image-div {
-    margin-right:10px;
-    width: 200px;
-    height: 200px;
-  }

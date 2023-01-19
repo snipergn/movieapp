@@ -2,6 +2,8 @@ import './App.css';
 import React from 'react';
 import Navbar from './components/navbar/navbar';
 import Header from './components/mainpage/header.js';
+import Section from './components/section/section';
+import Footer from './components/footer/footer';
 class App extends React.Component {
 
   render() {
@@ -26,6 +28,8 @@ class App extends React.Component {
       */}
       <Navbar/>
       <Header/>
+      <Section/>
+      <Footer/>
     </div>
     );
   }
