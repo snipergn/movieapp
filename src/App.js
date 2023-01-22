@@ -5,6 +5,29 @@ import Header from './components/mainpage/header.js';
 import Section from './components/section/section';
 import Footer from './components/footer/footer';
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      'moviedata': []
+    }
+    this.handledata = this.handledata.bind(this)
+  }
+
+
+  handledata = () => {
+    const api = '399de7528a6f7ce137d42429f7513ad0'
+    fetch(`http://api.themoviedb.org/3/movie/50689?api_key=${api}&language=ro-RO&page=1`)  
+    .then(response => response.json())
+    .then(response => console.log(response))
+    
+  }
+
+  componentDidMount() {
+    this.handledata()
+  }
+
+
+
 
   render() {
   return (

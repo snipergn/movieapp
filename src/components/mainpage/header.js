@@ -10,8 +10,8 @@ const Header = () => {
         data-ride="carousel"
       >
         <div class="carousel-inner">
-          <div class="carousel-item item active">
-            <img class="d-block w-100" src={firstSlide} alt="First slide" />
+          <div class="carousel-item header item active">
+            <img class="d-block headerImage w-100" src={firstSlide} alt="First slide" />
             <div className="carousel-caption">
               <p className="h4">Name Movie</p>
               <p className="p">Date Release </p>

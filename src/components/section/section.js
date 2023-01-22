@@ -27,7 +27,10 @@ const Section = () => {
                     <a href="#!">
                       <div
                         class="mask"
-                      ></div>
+                      >
+                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
+                       
+                      </div>
                     </a>
                   </div>
                 </div>
@@ -40,7 +43,7 @@ const Section = () => {
 
           <section class="text-left">
             <h4 class="mb-1 mt-5">
-              <strong>Latest posts</strong>
+              <strong>Drama</strong>
             </h4>
 
             <div class="row">
@@ -60,7 +63,9 @@ const Section = () => {
                     <a href="#!">
                       <div
                         class="mask"
-                      ></div>
+                      >
+                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
+                      </div>
                     </a>
                   </div>
                 </div>
@@ -72,7 +77,7 @@ const Section = () => {
 
           <section class="text-left">
             <h4 class="mb-1 mt-5">
-              <strong>Latest posts</strong>
+              <strong>Thriller</strong>
             </h4>
 
             <div class="row">
@@ -92,7 +97,9 @@ const Section = () => {
                     <a href="#!">
                       <div
                         class="mask"
-                      ></div>
+                      >
+                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
+                      </div>
                     </a>
                   </div>
                 </div>
@@ -102,6 +109,41 @@ const Section = () => {
           </section>
 
           {/* Section 4*/}
+
+          <section class="text-left">
+            <h4 class="mb-1 mt-5">
+              <strong>Comedy</strong>
+            </h4>
+
+            <div class="row">
+              <div class="col-lg-2 col-md-12 mb-4">
+                <div class="card">
+                  <div
+                    class="bg-image hover-overlay ripple"
+                    data-mdb-ripple-color="light"
+                  >
+                    <img
+                      src={
+                        "https://mdbootstrap.com/img/new/standard/nature/184.jpg"
+                      }
+                      class="img-fluid"
+                      alt ="img"
+                    />
+                    <a href="#!">
+                      <div
+                        class="mask"
+                      >
+                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div> 
+          </section>
+
+
+          {/* Section 5*/}
 
           <section class="text-left">
             <h4 class="mb-1 mt-5">
@@ -125,7 +167,44 @@ const Section = () => {
                     <a href="#!">
                       <div
                         class="mask"
-                      ></div>
+                      >
+                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div> 
+          </section>
+
+
+          {/* Section 6*/}
+
+          <section class="text-left">
+            <h4 class="mb-1 mt-5">
+              <strong>Latest posts</strong>
+            </h4>
+
+            <div class="row">
+              <div class="col-lg-2 col-md-12 mb-4">
+                <div class="card">
+                  <div
+                    class="bg-image hover-overlay ripple"
+                    data-mdb-ripple-color="light"
+                  >
+                    <img
+                      src={
+                        "https://mdbootstrap.com/img/new/standard/nature/184.jpg"
+                      }
+                      class="img-fluid"
+                      alt ="img"
+                    />
+                    <a href="#!">
+                      <div
+                        class="mask"
+                      >
+                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
+                      </div>
                     </a>
                   </div>
                 </div>
