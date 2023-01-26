@@ -1,24 +1,30 @@
 import "./header.css";
-import firstSlide from "../Assets/batman.jpg";
 
-const Header = () => {
+const Header = ({movielatest}) => {
+
   return (
     <div>
-      <div
-        id="carouselExampleSlidesOnly"
-        class="carousel slide"
-        data-ride="carousel"
-      >
-        <div class="carousel-inner">
-          <div class="carousel-item header item active">
-            <img class="d-block headerImage w-100" src={firstSlide} alt="First slide" />
-            <div className="carousel-caption">
-              <p className="h4">Name Movie</p>
-              <p className="p">Date Release </p>
+    {movielatest.map((item, index) => {
+      console.log(item)
+      return (
+          <div key={index}
+          id="carouselExampleSlidesOnly"
+          class="carousel slide"
+          data-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item item active">
+              <img class="d-block w-100 img-fluid " src={`https://image.tmdb.org/t/p/original/${item.results[0].poster_path}`} alt="First slide" />
+              <div className="carousel-caption">
+                <p className="h3">{item.results.title}</p>
+                <p className="p">Data Lansare: {item.results.release_date}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+   
+      )
+    })}
     </div>
   );
 };

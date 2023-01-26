@@ -1,17 +1,22 @@
 import React from "react";
 
-const Section = () => {
-  return (
-    <div>
+const Section = ({movielatest}) => {
+
+ 
+    return (
+      <div>
+        { movielatest.map((item, index) => {
+
+          return (
       <main class="my-5">
         <div class="container">
           <section class="text-left">
             <h4 class="mb-2 mt-5">
-              <strong>Latest posts</strong>
+              <strong>Filmele Recente</strong>
             </h4>
 
             <div class="row">
-              <div class="col-lg-2 col-md-12 mb-4">
+              <div class="col-lg-3 col-md-4  col-sm-6 mb-4">
                 <div class="card">
                   <div
                     class="bg-image hover-overlay ripple"
@@ -19,7 +24,7 @@ const Section = () => {
                   >
                     <img
                       src={
-                        "https://mdbootstrap.com/img/new/standard/nature/184.jpg"
+                        `https://image.tmdb.org/t/p/original/${item.results[0].poster_path}`
                       }
                       class="img-fluid"
                       alt ="img"
@@ -29,7 +34,6 @@ const Section = () => {
                         class="mask"
                       >
                         <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
-                       
                       </div>
                     </a>
                   </div>
@@ -47,7 +51,7 @@ const Section = () => {
             </h4>
 
             <div class="row">
-              <div class="col-lg-2 col-md-12 mb-4">
+              <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card">
                   <div
                     class="bg-image hover-overlay ripple"
@@ -81,7 +85,7 @@ const Section = () => {
             </h4>
 
             <div class="row">
-              <div class="col-lg-2 col-md-12 mb-4 ">
+              <div class="col-lg-3 col-md-4 mb-4 col-sm-6 ">
                 <div class="card">
                   <div
                     class="bg-image hover-overlay ripple"
@@ -116,7 +120,7 @@ const Section = () => {
             </h4>
 
             <div class="row">
-              <div class="col-lg-2 col-md-12 mb-4">
+              <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card">
                   <div
                     class="bg-image hover-overlay ripple"
@@ -151,7 +155,7 @@ const Section = () => {
             </h4>
 
             <div class="row">
-              <div class="col-lg-2 col-md-12 mb-4">
+              <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card">
                   <div
                     class="bg-image hover-overlay ripple"
@@ -186,7 +190,7 @@ const Section = () => {
             </h4>
 
             <div class="row">
-              <div class="col-lg-2 col-md-12 mb-4">
+              <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card">
                   <div
                     class="bg-image hover-overlay ripple"
@@ -213,8 +217,12 @@ const Section = () => {
           </section>
         </div>        
       </main>
+          )
+      })   
+    }
     </div>
   );
+                    
 };
 
 export default Section;

@@ -8,22 +8,39 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      'moviedata': []
+      'movielatest': [],
+      'moviegenes': []
+
     }
-    this.handledata = this.handledata.bind(this)
+    this.handleHeader = this.handleHeader.bind(this)
   }
 
-
-  handledata = () => {
+  handleHeader = () => {
     const api = '399de7528a6f7ce137d42429f7513ad0'
-    fetch(`http://api.themoviedb.org/3/movie/50689?api_key=${api}&language=ro-RO&page=1`)  
+    const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${api}&language=ro-RO&page=1`
+    fetch(url)
     .then(response => response.json())
-    .then(response => console.log(response))
-    
+    .then(data => {
+      let movieconcat = this.state.movielatest.concat(data)
+      let filtered = movieconcat.filter(filter => filter === data)
+      this.setState({movielatest: filtered})
+    })
+  }
+  handleMovieGenes = () => {
+    const api = '399de7528a6f7ce137d42429f7513ad0'
+    const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${api}&language=ro-RO&page=1`
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      let movieconcat = this.state.movielatest.concat(data)
+      let filtered = movieconcat.filter(filter => filter === data)
+      this.setState({moviegene: filtered})
+    })
   }
 
   componentDidMount() {
-    this.handledata()
+    this.handleHeader();
+    this.handleMovieGenes()
   }
 
 
@@ -50,8 +67,8 @@ class App extends React.Component {
       3. Database ?? (yet)
       */}
       <Navbar/>
-      <Header/>
-      <Section/>
+      <Header movielatest={this.state.movielatest}/>
+      <Section movielatest={this.state.movielatest}/>
       <Footer/>
     </div>
     );
