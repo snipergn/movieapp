@@ -1,3 +1,7 @@
 .mask {
     border-color: white;
 }
+.card  {
+    width: 300px;
+    height: 300px;
+}

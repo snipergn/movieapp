@@ -5,7 +5,6 @@ const Header = ({movielatest}) => {
   return (
     <div>
     {movielatest.map((item, index) => {
-      console.log(item)
       return (
           <div key={index}
           id="carouselExampleSlidesOnly"
@@ -14,11 +13,11 @@ const Header = ({movielatest}) => {
         >
           <div class="carousel-inner">
             <div class="carousel-item item active">
-              <img class="d-block w-100 img-fluid " src={`https://image.tmdb.org/t/p/original/${item.results[0].poster_path}`} alt="First slide" />
-              <div className="carousel-caption">
+              {/* <img class="d-block w-100 img-fluid " src={`https://image.tmdb.org/t/p/original/${item.results[0].poster_path}`} alt="First slide" /> */}
+              {/* <div className="carousel-caption">
                 <p className="h3">{item.results.title}</p>
                 <p className="p">Data Lansare: {item.results.release_date}</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

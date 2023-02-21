@@ -1,228 +1,80 @@
 import React from "react";
 
-const Section = ({movielatest}) => {
-
- 
-    return (
-      <div>
-        { movielatest.map((item, index) => {
-
-          return (
-      <main class="my-5">
-        <div class="container">
-          <section class="text-left">
-            <h4 class="mb-2 mt-5">
-              <strong>Filmele Recente</strong>
-            </h4>
-
-            <div class="row">
-              <div class="col-lg-3 col-md-4  col-sm-6 mb-4">
-                <div class="card">
-                  <div
-                    class="bg-image hover-overlay ripple"
-                    data-mdb-ripple-color="light"
-                  >
+const Section = ({ movielatest }) => {
+  // <img
+  //   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+  //   class="img-fluid"
+  //   alt="img"
+  // />;
+  return (
+    <div>
+      {movielatest.map((item) => {
+        return (
+          <div>
+            {item.results.map((item) => {
+              return (
+                <div class="card-group">
+                  <div class="card">
                     <img
-                      src={
-                        `https://image.tmdb.org/t/p/original/${item.results[0].poster_path}`
-                      }
+                      src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       class="img-fluid"
-                      alt ="img"
+                      alt="img"
                     />
-                    <a href="#!">
-                      <div
-                        class="mask"
-                      >
-                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
-                      </div>
-                    </a>
+
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">
+                        This is a wider card with supporting text below as a
+                        natural lead-in to additional content. This content is a
+                        little bit longer.
+                      </p>
+                      <p class="card-text">
+                        <small class="text-muted">
+                          Last updated 3 mins ago
+                        </small>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="..." class="card-img-top" alt="..." />
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">
+                        This card has supporting text below as a natural lead-in
+                        to additional content.
+                      </p>
+                      <p class="card-text">
+                        <small class="text-muted">
+                          Last updated 3 mins ago
+                        </small>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="..." class="card-img-top" alt="..." />
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">
+                        This is a wider card with supporting text below as a
+                        natural lead-in to additional content. This card has
+                        even longer content than the first to show that equal
+                        height action.
+                      </p>
+                      <p class="card-text">
+                        <small class="text-muted">
+                          Last updated 3 mins ago
+                        </small>
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div> 
-
-          </section>
-
-          {/* Section 2*/}
-
-          <section class="text-left">
-            <h4 class="mb-1 mt-5">
-              <strong>Drama</strong>
-            </h4>
-
-            <div class="row">
-              <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="card">
-                  <div
-                    class="bg-image hover-overlay ripple"
-                    data-mdb-ripple-color="light"
-                  >
-                    <img
-                      src={
-                        "https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                      }
-                      class="img-fluid"
-                      alt ="img"
-                    />
-                    <a href="#!">
-                      <div
-                        class="mask"
-                      >
-                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> 
-          </section>
-
-          {/* Section 3*/}
-
-          <section class="text-left">
-            <h4 class="mb-1 mt-5">
-              <strong>Thriller</strong>
-            </h4>
-
-            <div class="row">
-              <div class="col-lg-3 col-md-4 mb-4 col-sm-6 ">
-                <div class="card">
-                  <div
-                    class="bg-image hover-overlay ripple"
-                    data-mdb-ripple-color="light"
-                  >
-                    <img
-                      src={
-                        "https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                      }
-                      class="img-fluid"
-                      alt ="img"
-                    />
-                    <a href="#!">
-                      <div
-                        class="mask"
-                      >
-                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> 
-
-          </section>
-
-          {/* Section 4*/}
-
-          <section class="text-left">
-            <h4 class="mb-1 mt-5">
-              <strong>Comedy</strong>
-            </h4>
-
-            <div class="row">
-              <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="card">
-                  <div
-                    class="bg-image hover-overlay ripple"
-                    data-mdb-ripple-color="light"
-                  >
-                    <img
-                      src={
-                        "https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                      }
-                      class="img-fluid"
-                      alt ="img"
-                    />
-                    <a href="#!">
-                      <div
-                        class="mask"
-                      >
-                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> 
-          </section>
-
-
-          {/* Section 5*/}
-
-          <section class="text-left">
-            <h4 class="mb-1 mt-5">
-              <strong>Latest posts</strong>
-            </h4>
-
-            <div class="row">
-              <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="card">
-                  <div
-                    class="bg-image hover-overlay ripple"
-                    data-mdb-ripple-color="light"
-                  >
-                    <img
-                      src={
-                        "https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                      }
-                      class="img-fluid"
-                      alt ="img"
-                    />
-                    <a href="#!">
-                      <div
-                        class="mask"
-                      >
-                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> 
-          </section>
-
-
-          {/* Section 6*/}
-
-          <section class="text-left">
-            <h4 class="mb-1 mt-5">
-              <strong>Latest posts</strong>
-            </h4>
-
-            <div class="row">
-              <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="card">
-                  <div
-                    class="bg-image hover-overlay ripple"
-                    data-mdb-ripple-color="light"
-                  >
-                    <img
-                      src={
-                        "https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                      }
-                      class="img-fluid"
-                      alt ="img"
-                    />
-                    <a href="#!">
-                      <div
-                        class="mask"
-                      >
-                        <button type="button" class="btn btn-primary mt-3">Add to Favorite</button>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> 
-          </section>
-        </div>        
-      </main>
-          )
-      })   
-    }
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
-                    
 };
 
 export default Section;

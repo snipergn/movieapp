@@ -9,11 +9,15 @@ class App extends React.Component {
     super(props)
     this.state = {
       'movielatest': [],
-      'moviegenes': []
+      'moviegenes': [],
+      'poster_path': []
 
     }
     this.handleHeader = this.handleHeader.bind(this)
+    console.log(this.state.poster_path.map(item => item))
+
   }
+  
 
   handleHeader = () => {
     const api = '399de7528a6f7ce137d42429f7513ad0'
@@ -23,7 +27,11 @@ class App extends React.Component {
     .then(data => {
       let movieconcat = this.state.movielatest.concat(data)
       let filtered = movieconcat.filter(filter => filter === data)
-      this.setState({movielatest: filtered})
+      let objectkey = filtered[Object.keys(filtered )[0]]
+      this.setState({
+        movielatest: filtered,
+        poster_path: objectkey
+      })
     })
   }
   handleMovieGenes = () => {
