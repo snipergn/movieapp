@@ -21,13 +21,13 @@ class App extends React.Component {
 
   handleHeader = () => {
     const api = '399de7528a6f7ce137d42429f7513ad0'
-    const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${api}&language=ro-RO&page=1`
+    const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${api}&language=en-US&page=1`
     fetch(url)
     .then(response => response.json())
     .then(data => {
       let movieconcat = this.state.movielatest.concat(data)
       let filtered = movieconcat.filter(filter => filter === data)
-      let objectkey = filtered[Object.keys(filtered )[0]]
+      let objectkey = filtered[Object.keys(filtered)[0]]
       this.setState({
         movielatest: filtered,
         poster_path: objectkey
@@ -36,7 +36,7 @@ class App extends React.Component {
   }
   handleMovieGenes = () => {
     const api = '399de7528a6f7ce137d42429f7513ad0'
-    const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${api}&language=ro-RO&page=1`
+    const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${api}&language=en-US&page=1`
     fetch(url)
     .then(response => response.json())
     .then(data => {

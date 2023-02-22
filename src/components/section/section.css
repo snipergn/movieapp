@@ -1,7 +1,12 @@
 .mask {
     border-color: white;
 }
-.card  {
-    width: 300px;
-    height: 300px;
+.img-fluid  {
+    width: 12rem;
+    height: 50%;
+}
+.card {
+    max-width: 250px;
+    max-height: 450px;
+    display: inline-block
 }
