@@ -10,11 +10,9 @@ class App extends React.Component {
     this.state = {
       'movielatest': [],
       'moviegenes': [],
-      'poster_path': []
 
     }
     this.handleHeader = this.handleHeader.bind(this)
-    console.log(this.state.poster_path.map(item => item))
 
   }
   
@@ -40,9 +38,11 @@ class App extends React.Component {
     fetch(url)
     .then(response => response.json())
     .then(data => {
-      let movieconcat = this.state.movielatest.concat(data)
+      let movieconcat = this.state.moviegenes.concat(data)
       let filtered = movieconcat.filter(filter => filter === data)
-      this.setState({moviegene: filtered})
+      this.setState({
+        moviegenes: filtered
+      })
     })
   }
 

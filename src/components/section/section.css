@@ -7,6 +7,6 @@
 }
 .card {
     max-width: 250px;
-    max-height: 450px;
+    max-height: auto;
     display: inline-block
 }
