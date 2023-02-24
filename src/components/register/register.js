@@ -19,7 +19,7 @@ const Register = () => {
             style={{ borderRadius: "1rem", maxWidth: "500px" }}
           >
             <MDBCardBody className="p-5 w-100 d-flex flex-column">
-              <h1 className="fw-bold mb-2 text-center">Sign in</h1>
+              <h1 className="fw-bold mb-2 text-center">Register</h1>
               <p className="text-white-50 mb-3 mt-1">
                 Please enter your login and password!
               </p>
@@ -44,7 +44,8 @@ const Register = () => {
                 type="name"
                 size="lg"
               />
-            <a type="button" class="btn btn-primary btn-lg" href="/">Sign In</a>
+            <a type="button" class="btn btn-primary btn-lg" href="/">Register</a>
+            <p className="mt-3">You have account? <a className="hyperlink" href="/register">Login Now</a></p>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
