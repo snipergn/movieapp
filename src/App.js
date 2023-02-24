@@ -1,81 +1,79 @@
-import './App.css';
-import React from 'react';
-import Navbar from './components/navbar/navbar';
-import Header from './components/mainpage/header.js';
-import Section from './components/section/section';
-import Footer from './components/footer/footer';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import Navbar from "./components/navbar/navbar";
+import Header from "./components/mainpage/header.js";
+import Section from "./components/section/section";
+import Footer from "./components/footer/footer";
+import Favoritelist from "./components/favoritelist/favorite";
+import Signin from "./components/signin/singin";
+import Register from "./components/register/register";
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      'popularmovies': [],
-      'upcomingmovies': [],
-      'comedymovies': [],
-      "documentarymovies": []
-
-    }
+      popularmovies: [],
+      upcomingmovies: [],
+      comedymovies: [],
+      documentarymovies: [],
+    };
     this.handleHeader = this.handleHeader.bind(this);
   }
-  
 
   handleHeader = () => {
-    const api = '399de7528a6f7ce137d42429f7513ad0'
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${api}&language=en-US&page=1`
+    const api = "399de7528a6f7ce137d42429f7513ad0";
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${api}&language=en-US&page=1`;
     fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      let movieconcat = this.state.popularmovies.concat(data)
-      let filtered = movieconcat.filter(filter => filter === data)
-      this.setState({
-        popularmovies: filtered,
-      })
-    })
-    const urlupcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`
+      .then((response) => response.json())
+      .then((data) => {
+        let movieconcat = this.state.popularmovies.concat(data);
+        let filtered = movieconcat.filter((filter) => filter === data);
+        this.setState({
+          popularmovies: filtered,
+        });
+      });
+    const urlupcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`;
     fetch(urlupcoming)
-    .then(response => response.json())
-    .then(data => {
-      let movieconcat = this.state.upcomingmovies.concat(data)
-      let filtered = movieconcat.filter(filter => filter === data)
-      this.setState({
-        upcomingmovies: filtered
-      })
-    })
-    const getGen = `https://api.themoviedb.org/3/discover/movie?api_key=${api}&with_genres=35`
+      .then((response) => response.json())
+      .then((data) => {
+        let movieconcat = this.state.upcomingmovies.concat(data);
+        let filtered = movieconcat.filter((filter) => filter === data);
+        this.setState({
+          upcomingmovies: filtered,
+        });
+      });
+    const getGen = `https://api.themoviedb.org/3/discover/movie?api_key=${api}&with_genres=35`;
     fetch(getGen)
-    .then(response => response.json())
-    .then(data => {
-      let movieconcat = this.state.comedymovies.concat(data)
-      let filtered = movieconcat.filter(filter => filter === data)
-      this.setState({
-        comedymovies: filtered
-      })
-      console.log(filtered)
-    })
-    const getDocumentary = `https://api.themoviedb.org/3/discover/movie?api_key=399de7528a6f7ce137d42429f7513ad0&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`
+      .then((response) => response.json())
+      .then((data) => {
+        let movieconcat = this.state.comedymovies.concat(data);
+        let filtered = movieconcat.filter((filter) => filter === data);
+        this.setState({
+          comedymovies: filtered,
+        });
+        console.log(filtered);
+      });
+    const getDocumentary = `https://api.themoviedb.org/3/discover/movie?api_key=399de7528a6f7ce137d42429f7513ad0&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`;
     fetch(getDocumentary)
-    .then(response => response.json())
-    .then(data => {
-      let movieconcat = this.state.documentarymovies.concat(data)
-      let filtered = movieconcat.filter(filter => filter === data)
-      this.setState({
-        documentarymovies: filtered
-      })
-      console.log(filtered)
-    })
-  }
-  
+      .then((response) => response.json())
+      .then((data) => {
+        let movieconcat = this.state.documentarymovies.concat(data);
+        let filtered = movieconcat.filter((filter) => filter === data);
+        this.setState({
+          documentarymovies: filtered,
+        });
+        console.log(filtered);
+      });
+  };
 
   componentDidMount() {
     this.handleHeader();
- }
-
-
-
+  }
 
   render() {
-  return (
-    <div className="App">
-      {/*
+    return (
+      <div className="App">
+        {/*
       1.Frontend Page
         -> Main Page
         -> Login && Register Page by User Data/ID
@@ -92,17 +90,36 @@ class App extends React.Component {
 
       3. Database ?? (yet)
       */}
-      <Navbar/>
-      <Header movielatest={this.state.popularmovies}/>
-      <Section 
-        movielatest={this.state.popularmovies} 
-        futureMovies={this.state.upcomingmovies} 
-        comedyMovies={this.state.comedymovies}
-        movieDocumentary={this.state.documentarymovies}
 
-      />
-      <Footer/>
-    </div>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              exact  path="/" element={
+                <div>
+                  <Navbar />
+                  <Header movielatest={this.state.popularmovies} />
+                  <Section
+                    movielatest={this.state.popularmovies}
+                    futureMovies={this.state.upcomingmovies}
+                    comedyMovies={this.state.comedymovies}
+                    movieDocumentary={this.state.documentarymovies}
+                  />
+                  <Footer/>
+                </div>
+                }/>
+            <Route
+              exact path="/favoritelist" element={
+                <div>
+                  <Navbar />
+                  <Favoritelist movielatest={this.state.popularmovies} />
+                  <Footer />
+                </div>
+              }/>
+            <Route exact path="/signin" element={<Signin/>}/>
+            <Route exact path="/register" element={<Register/>}/>
+          </Routes>
+        </BrowserRouter>
+      </div>
     );
   }
 }

@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <div className="App">
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <img
             src={NetflixLogo}
             width="30"
@@ -27,12 +27,12 @@ const Navbar = () => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/">
                 Main Page <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/favoritelist">
                 My List 
               </a>
             </li>
@@ -47,7 +47,7 @@ const Navbar = () => {
           </form>
           <ul class="navbar-nav">
             <li class="nav-item ">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="signin">
                 Sign Out 
               </a>
             </li>
