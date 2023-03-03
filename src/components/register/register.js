@@ -45,7 +45,7 @@ const Register = () => {
                 size="lg"
               />
             <a type="button" class="btn btn-primary btn-lg" href="/">Register</a>
-            <p className="mt-3">You have account? <a className="hyperlink" href="/register">Login Now</a></p>
+            <p className="mt-3">You have account? <a className="hyperlink" href="/signin">Login Now</a></p>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>

@@ -1,16 +1,18 @@
 import React from "react";
 import "./section.css";
 
-const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary }) => {
-  
+const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, upcomingbutton}) => {
+
+
+
   return (
     <div className="mt-2 ml-5 mr-5">
     {/* LATEST MOVIES SECTION*/}
     <h1 className="text-left mt-5">Popular</h1>
-      {movielatest.map((item) => {
+      {movielatest.map((item, index) => {
         let filterAPI = item.results.slice(0, 6)
         return (
-          <div className="row row-cols-1 row-cols-md-3 g-4">
+          <div key = {index} className="row row-cols-1 row-cols-md-3 g-4">
             {filterAPI.map((item, index) => {
               let results = item.overview.substr(0,60)
               return (
@@ -26,7 +28,11 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary }) 
                         <p class="card-text">
                           {results}...
                         </p>
-                        <button class="btn btn-primary" type="button">Add to Favorite</button>
+                        <button class="btn btn-primary button" 
+                        type="button"
+
+                        >Add to Favorite
+                        </button>
                       </div>
                     </div>
                 </div>
@@ -59,7 +65,10 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary }) 
                         <p>Release Date: <br/>
                           <strong>{item.release_date}</strong>
                         </p>
-                        <button class="btn btn-danger" type="button">Add to Favorite</button>
+                        <button class="btn btn-danger button" 
+                        type="button"
+                        onClick={upcomingbutton}
+                        >Add to Favorite</button>
                       </div>
                     </div>
                 </div>
@@ -89,7 +98,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary }) 
                         <p class="card-text">
                           {results}...
                         </p>
-                        <button class="btn btn-warning" type="button">Add to Favorite</button>
+                        <button class="btn btn-warning button" type="button">Add to Favorite</button>
                       </div>
                     </div>
                 </div>
@@ -119,7 +128,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary }) 
                         <p class="card-text">
                           {results}...
                         </p>
-                        <button class="btn btn-primary" type="button">Add to Favorite</button>
+                        <button class="btn btn-primary button " type="button">Add to Favorite</button>
                       </div>
                     </div>
                 </div>

@@ -1,6 +1,11 @@
 import React from "react";
 
-const Favoritelist = ({ movielatest }) => {
+const Favoritelist = ({ movielatest, futureMovies, favoriteList}) => {
+  let movies = futureMovies.map(item => item.results)
+  let findfavorite = movies.filter(movies => favoriteList.includes(movies.id));
+  let map = findfavorite.map(item => item)
+  console.log(map)
+
   return (
     <div>
       <div className="mt-2 ml-5 mr-5">
