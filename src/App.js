@@ -17,7 +17,8 @@ class App extends React.Component {
       upcomingmovies: [],
       comedymovies: [],
       documentarymovies: [],
-      favoriteList: []
+      favstate: false,
+      favoriteList: [],
     };
     this.handleHeader = this.handleHeader.bind(this);
     this.addToFavorite = this.addToFavorite.bind(this) 
@@ -70,21 +71,15 @@ class App extends React.Component {
   };
 
    // #1 Click the button and add the element into a new list with id, items etc.
-  addToFavorite = () => {
-    let upcomingstate = this.state.upcomingmovies
-    upcomingstate.map((item) => {
-      item.results.map(item => {
-        let favorite = this.state.favoriteList
-        if(!favorite.includes(item.id)) {
-          let concatfavorite = favorite.concat(item.id)
-          this.setState({
-            favorite: concatfavorite 
-          })
-          console.log(concatfavorite)
-        }
-      })
-    })
-
+  addToFavorite = (id) => {
+    let favorite = this.state.favoriteList
+    if (!favorite.includes(id) && !undefined) {
+      let concat = favorite.concat(id)
+      this.setState({
+        favoriteList: [...concat]
+      });
+    }
+    
 }
    // #2 Display the new list filtred by favorites into next page *my page* and add a button to delete them.
    // #3 Delete the items from the list created before.
@@ -95,8 +90,10 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.favoriteList)
     return (
       <div className="App">
+      
         {/*
       1.Frontend Page
         -> Main Page
@@ -137,9 +134,9 @@ class App extends React.Component {
                 <div>
                   <Navbar />
                   <Favoritelist 
-                  movielatest={this.state.popularmovies} 
-                  favoriteList={this.state.favoriteList}
-                  futureMovies={this.state.upcomingmovies}
+                    movielatest={this.state.popularmovies} 
+                    favoriteList={this.state.favoriteList}
+                    futureMovies={this.state.upcomingmovies}
                   />
                   <Footer />
                 </div>

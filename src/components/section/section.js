@@ -50,7 +50,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, up
             {filterAPI.map((item, index) => {
               let results = item.overview.substr(0,60)
               return (
-                  <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
+                  <div key = {index} class="col-lg-2 col-md-4 col-sm-6 mt-3">
                     <div class="card h-100">
                       <img
                         src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
@@ -67,7 +67,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, up
                         </p>
                         <button class="btn btn-danger button" 
                         type="button"
-                        onClick={upcomingbutton}
+                        onClick={() => upcomingbutton(item.id)}
                         >Add to Favorite</button>
                       </div>
                     </div>
@@ -82,7 +82,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, up
       {comedyMovies.map((item) => {
         let filterAPI = item.results.slice(0, 6)
         return (
-          <div className="row row-cols-1 row-cols-md-3 g-4">
+          <div  className="row row-cols-1 row-cols-md-3 g-4">
             {filterAPI.map((item, index) => {
               let results = item.overview.substr(0,60)
               return (
