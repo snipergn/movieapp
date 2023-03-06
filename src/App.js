@@ -17,12 +17,11 @@ class App extends React.Component {
       upcomingmovies: [],
       comedymovies: [],
       documentarymovies: [],
-      favstate: false,
       favoriteList: [],
     };
     this.handleHeader = this.handleHeader.bind(this);
-    this.addToFavorite = this.addToFavorite.bind(this) 
-    
+    this.addToFavorite = this.addToFavorite.bind(this);
+    this.removeFavorite = this.removeFavorite.bind(this);
   }
 
   handleHeader = () => {
@@ -46,7 +45,6 @@ class App extends React.Component {
         this.setState({
           upcomingmovies: filtered,
         });
-        
       });
     const getGen = `https://api.themoviedb.org/3/discover/movie?api_key=${api}&with_genres=35`;
     fetch(getGen)
@@ -70,30 +68,38 @@ class App extends React.Component {
       });
   };
 
-   // #1 Click the button and add the element into a new list with id, items etc.
+  // #1 Click the button and add the element into a new list with id, items etc.
   addToFavorite = (id) => {
-    let favorite = this.state.favoriteList
-    if (!favorite.includes(id) && !undefined) {
-      let concat = favorite.concat(id)
+    let favorite = this.state.favoriteList;
+    if (!favorite.includes(id)) {
+      let concat = favorite.concat(id);
       this.setState({
-        favoriteList: [...concat]
+        favoriteList: [...concat],
       });
     }
-    
-}
-   // #2 Display the new list filtred by favorites into next page *my page* and add a button to delete them.
-   // #3 Delete the items from the list created before.
+  };
+
+  // #2 Display the new list filtred by favorites into next page *my page* and add a button to delete them.
+  
+  // #3 Delete the items from the list created before.
+  removeFavorite = (id) => {
+    let favorite = this.state.favoriteList;
+    let index = favorite.indexOf(id);
+    console.log(index);
+    let temp = [...favorite.slice(0, index), ...favorite.slice(index + 1)];
+    this.setState({
+      favoriteList: temp,
+    });
+  };
 
   componentDidMount() {
     this.handleHeader();
-    this.addToFavorite();
   }
 
   render() {
-    console.log(this.state.favoriteList)
+    
     return (
       <div className="App">
-      
         {/*
       1.Frontend Page
         -> Main Page
@@ -115,34 +121,41 @@ class App extends React.Component {
         <BrowserRouter>
           <Routes>
             <Route
-              exact  path="/" element={
+              exact
+              path="/"
+              element={
                 <div>
                   <Navbar />
                   <Header movielatest={this.state.popularmovies} />
                   <Section
-                    upcomingbutton = {this.addToFavorite.bind(this)}
+                    upcomingbutton={this.addToFavorite.bind(this)}
                     movielatest={this.state.popularmovies}
                     futureMovies={this.state.upcomingmovies}
                     comedyMovies={this.state.comedymovies}
                     movieDocumentary={this.state.documentarymovies}
                   />
-                  <Footer/>
+                  <Footer />
                 </div>
-                }/>
+              }
+            />
             <Route
-              exact path="/favoritelist" element={
+              exact
+              path="/favoritelist"
+              element={
                 <div>
                   <Navbar />
-                  <Favoritelist 
-                    movielatest={this.state.popularmovies} 
+                  <Favoritelist
+                    movielatest={this.state.popularmovies}
                     favoriteList={this.state.favoriteList}
                     futureMovies={this.state.upcomingmovies}
+                    removefavorite={this.removeFavorite.bind(this)}
                   />
                   <Footer />
                 </div>
-              }/>
-            <Route exact path="/signin" element={<Signin/>}/>
-            <Route exact path="/register" element={<Register/>}/>
+              }
+            />
+            <Route exact path="/signin" element={<Signin />} />
+            <Route exact path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>
       </div>
