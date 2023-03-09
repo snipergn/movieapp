@@ -5,10 +5,8 @@ import Navbar from "./components/navbar/navbar";
 import Header from "./components/mainpage/header.js";
 import Section from "./components/section/section";
 import Footer from "./components/footer/footer";
-import Favoritelist from "./components/favoritelist/favorite";
 import Signin from "./components/signin/singin";
 import Register from "./components/register/register";
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -16,12 +14,13 @@ class App extends React.Component {
       popularmovies: [],
       upcomingmovies: [],
       comedymovies: [],
-      documentarymovies: [],
+      romancemovies: [],
       favoriteList: [],
+
     };
     this.handleHeader = this.handleHeader.bind(this);
     this.addToFavorite = this.addToFavorite.bind(this);
-    this.removeFavorite = this.removeFavorite.bind(this);
+    this.deleteToFavorite = this.deleteToFavorite.bind(this);
   }
 
   handleHeader = () => {
@@ -40,64 +39,48 @@ class App extends React.Component {
     fetch(urlupcoming)
       .then((response) => response.json())
       .then((data) => {
-        let movieconcat = this.state.upcomingmovies.concat(data);
-        let filtered = movieconcat.filter((filter) => filter === data);
         this.setState({
-          upcomingmovies: filtered,
+          upcomingmovies: data.results,
         });
       });
     const getGen = `https://api.themoviedb.org/3/discover/movie?api_key=${api}&with_genres=35`;
     fetch(getGen)
       .then((response) => response.json())
       .then((data) => {
-        let movieconcat = this.state.comedymovies.concat(data);
-        let filtered = movieconcat.filter((filter) => filter === data);
         this.setState({
-          comedymovies: filtered,
+          comedymovies: data.results,
         });
       });
-    const getDocumentary = `https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`;
-    fetch(getDocumentary)
+    const Romance = `https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`;
+    fetch(Romance)
       .then((response) => response.json())
       .then((data) => {
-        let movieconcat = this.state.documentarymovies.concat(data);
-        let filtered = movieconcat.filter((filter) => filter === data);
         this.setState({
-          documentarymovies: filtered,
+          romancemovies: data.results
         });
       });
   };
 
   // #1 Click the button and add the element into a new list with id, items etc.
-  addToFavorite = (id) => {
-    let favorite = this.state.favoriteList;
-    if (!favorite.includes(id)) {
-      let concat = favorite.concat(id);
-      this.setState({
-        favoriteList: [...concat],
-      });
-    }
-  };
-
-  // #2 Display the new list filtred by favorites into next page *my page* and add a button to delete them.
-  
-  // #3 Delete the items from the list created before.
-  removeFavorite = (id) => {
-    let favorite = this.state.favoriteList;
-    let index = favorite.indexOf(id);
-    console.log(index);
-    let temp = [...favorite.slice(0, index), ...favorite.slice(index + 1)];
+  addToFavorite = id => {
+    const data = this.state.upcomingmovies.find(item => item.id === id);
     this.setState({
-      favoriteList: temp,
+      favoriteList: [...this.state.favoriteList, data]
     });
   };
+
+  deleteToFavorite = id => {
+    const hapus = this.state.favoriteList.filter(item => item.id !== id);
+    this.setState({ favoriteList: hapus });
+  };
+
 
   componentDidMount() {
     this.handleHeader();
   }
 
   render() {
-    
+   console.log(this.state.favoriteList)
     return (
       <div className="App">
         {/*
@@ -128,27 +111,13 @@ class App extends React.Component {
                   <Navbar />
                   <Header movielatest={this.state.popularmovies} />
                   <Section
-                    upcomingbutton={this.addToFavorite.bind(this)}
+                    upcomingbutton={this.addToFavorite}
                     movielatest={this.state.popularmovies}
                     futureMovies={this.state.upcomingmovies}
                     comedyMovies={this.state.comedymovies}
-                    movieDocumentary={this.state.documentarymovies}
-                  />
-                  <Footer />
-                </div>
-              }
-            />
-            <Route
-              exact
-              path="/favoritelist"
-              element={
-                <div>
-                  <Navbar />
-                  <Favoritelist
-                    movielatest={this.state.popularmovies}
-                    favoriteList={this.state.favoriteList}
-                    futureMovies={this.state.upcomingmovies}
-                    removefavorite={this.removeFavorite.bind(this)}
+                    romancemovies={this.state.romancemovies}
+                    moviefav={this.state.favoriteList}
+                    deleteItems={this.deleteToFavorite}
                   />
                   <Footer />
                 </div>

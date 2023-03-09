@@ -1,8 +1,11 @@
 import React from "react";
 import "./section.css";
 
-const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, upcomingbutton}) => {
-
+const Section = ({ movielatest, futureMovies, comedyMovies, romancemovies, upcomingbutton, moviefav, deleteItems}) => {
+  let romanceSlicing = romancemovies.map(item => item)
+  let slicing = romanceSlicing.slice(0, 6)
+  let futureSlicing = futureMovies.map(item => item)
+  let slicingFuture = futureSlicing.slice(0, 6)
 
 
   return (
@@ -17,7 +20,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, up
               let results = item.overview.substr(0,60)
               return (
                   <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-                    <div class="card h-100">
+                    <div key={index} class="card h-100">
                       <img
                         src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                         class="img-fluid"
@@ -30,7 +33,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, up
                         </p>
                         <button class="btn btn-primary button" 
                         type="button"
-
+                        onClick={() => upcomingbutton(item.id)}
                         >Add to Favorite
                         </button>
                       </div>
@@ -42,16 +45,13 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, up
         );
       })}
       {/* UPCOMING MOVIES SECTION*/}
-      <h1 className="text-left mt-5">Upcoming</h1>
-      {futureMovies.map((item) => {
-        let filterAPI = item.results.slice(0, 6)
-        return (
-          <div className="row row-cols-1 row-cols-md-3 g-4">
-            {filterAPI.map((item, index) => {
+      <h1 className="text-left mt-5">Upcoming Movies</h1>
+          <div className="row row-cols-1 row-cols-md-3 g-4 mb-5">
+            {slicingFuture.map((item, index) => {
               let results = item.overview.substr(0,60)
               return (
-                  <div key = {index} class="col-lg-2 col-md-4 col-sm-6 mt-3">
-                    <div class="card h-100">
+                  <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
+                    <div key={index} class="card h-100">
                       <img
                         src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                         class="img-fluid"
@@ -62,62 +62,23 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, up
                         <p class="card-text">
                           {results}...
                         </p>
-                        <p>Release Date: <br/>
-                          <strong>{item.release_date}</strong>
-                        </p>
-                        <button class="btn btn-danger button" 
-                        type="button"
+                        <button class="btn btn-danger button " 
                         onClick={() => upcomingbutton(item.id)}
-                        >Add to Favorite</button>
+                        type="button">Add to Favorite</button>
                       </div>
                     </div>
                 </div>
               );
             })}
           </div>
-        );
-      })}
-      {/* COMEDY MOVIES SECTION*/}
-      <h1 className="text-left mt-5">Comedy</h1>
-      {comedyMovies.map((item) => {
-        let filterAPI = item.results.slice(0, 6)
-        return (
-          <div  className="row row-cols-1 row-cols-md-3 g-4">
-            {filterAPI.map((item, index) => {
-              let results = item.overview.substr(0,60)
-              return (
-                  <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-                    <div class="card h-100">
-                      <img
-                        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                        class="img-fluid"
-                        alt="img"
-                      />
-                      <div class="card-body">
-                        <h6 class="card-title">{item.title}</h6>
-                        <p class="card-text">
-                          {results}...
-                        </p>
-                        <button class="btn btn-warning button" type="button">Add to Favorite</button>
-                      </div>
-                    </div>
-                </div>
-              );
-            })}
-          </div>         
-        );
-      })}
       {/* ROMANCE MOVIES SECTION*/}
       <h1 className="text-left mt-5">Romance</h1>
-      {movieDocumentary.map((item) => {
-        let filterAPI = item.results.slice(0, 6)
-        return (
           <div className="row row-cols-1 row-cols-md-3 g-4 mb-5">
-            {filterAPI.map((item, index) => {
+            {slicing.map((item, index) => {
               let results = item.overview.substr(0,60)
               return (
                   <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-                    <div class="card h-100">
+                    <div key={index} class="card h-100">
                       <img
                         src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                         class="img-fluid"
@@ -128,15 +89,44 @@ const Section = ({ movielatest, futureMovies, comedyMovies, movieDocumentary, up
                         <p class="card-text">
                           {results}...
                         </p>
-                        <button class="btn btn-primary button " type="button">Add to Favorite</button>
+                        <button class="btn btn-primary button " 
+                        onClick={() => upcomingbutton(item.id)}
+                        type="button">Add to Favorite</button>
                       </div>
                     </div>
                 </div>
               );
             })}
           </div>
-        );
-      })}
+          {/* FAVORITE MOVIES SECTION*/}
+        <h1 className="text-left mt-5">Favorite List</h1>
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          {moviefav.map((item, index) => {
+            let results = item.overview.substr(0, 60);
+            return (
+              <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
+                <div class="card h-100">
+                  <img
+                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                    class="img-fluid"
+                    alt="img"
+                  />
+                  <div class="card-body">
+                    <h6 class="card-title">{item.title}</h6>
+                    <p class="card-text">{results}...</p>
+                    <button
+                      class="btn btn-danger"
+                      type="button"
+                      onClick={() => deleteItems(item.id)}
+                    >
+                      Remove from favorites
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
     </div>
   );
 };
