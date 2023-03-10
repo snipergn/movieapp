@@ -19,8 +19,10 @@ class App extends React.Component {
 
     };
     this.handleHeader = this.handleHeader.bind(this);
-    this.addToFavorite = this.addToFavorite.bind(this);
+    this.addToFavoriteUpcoming = this.addToFavoriteUpcoming.bind(this);
     this.deleteToFavorite = this.deleteToFavorite.bind(this);
+    this.addToFavoriteRomance = this.addToFavoriteRomance.bind(this);
+    this.addToFavoriteComedy = this.addToFavoriteComedy.bind(this);
   }
 
   handleHeader = () => {
@@ -62,10 +64,23 @@ class App extends React.Component {
   };
 
   // #1 Click the button and add the element into a new list with id, items etc.
-  addToFavorite = id => {
-    const data = this.state.upcomingmovies.find(item => item.id === id);
+  addToFavoriteUpcoming = id => {
+    const upcomingmovies = this.state.upcomingmovies.find(item => item.id === id);
     this.setState({
-      favoriteList: [...this.state.favoriteList, data]
+      favoriteList: [...this.state.favoriteList, upcomingmovies]
+    });
+  };
+  addToFavoriteComedy = id => {
+    const comedy =  this.state.comedymovies.find(item => item.id === id);
+      this.setState({
+        favoriteList: [...this.state.favoriteList, comedy]
+      });
+
+  };
+  addToFavoriteRomance = id => {
+    const romance =  this.state.romancemovies.find(item => item.id === id);
+    this.setState({
+      favoriteList: [...this.state.favoriteList, romance]
     });
   };
 
@@ -110,8 +125,10 @@ class App extends React.Component {
                 <div>
                   <Navbar />
                   <Header movielatest={this.state.popularmovies} />
-                  <Section
-                    upcomingbutton={this.addToFavorite}
+                  <Section 
+                    favoriteComedy={this.addToFavoriteComedy}
+                    favoriteRomance={this.addToFavoriteRomance}
+                    favoriteUpcoming={this.addToFavoriteUpcoming}
                     movielatest={this.state.popularmovies}
                     futureMovies={this.state.upcomingmovies}
                     comedyMovies={this.state.comedymovies}

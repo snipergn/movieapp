@@ -1,15 +1,50 @@
 import React from "react";
 import "./section.css";
 
-const Section = ({ movielatest, futureMovies, comedyMovies, romancemovies, upcomingbutton, moviefav, deleteItems}) => {
+const Section = ({ movielatest, futureMovies, comedyMovies, 
+  romancemovies, favoriteUpcoming, moviefav, 
+  deleteItems, favoriteRomance, favoriteComedy}) => {
+
+
   let romanceSlicing = romancemovies.map(item => item)
   let slicing = romanceSlicing.slice(0, 6)
   let futureSlicing = futureMovies.map(item => item)
   let slicingFuture = futureSlicing.slice(0, 6)
+  let mapingComedy = comedyMovies.map(item => item)
+  const slicingComedy = mapingComedy.slice(0, 6)
 
 
   return (
     <div className="mt-2 ml-5 mr-5">
+    {/* FAVORITE MOVIES SECTION*/}
+    <h1 className="text-left mt-5">Favorite List</h1>
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          {moviefav.map((item, index) => {
+            let results = item.overview.substr(0, 60);
+            return (
+              <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
+                <div class="card h-100">
+                  <img
+                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                    class="img-fluid"
+                    alt="img"
+                  />
+                  <div class="card-body">
+                    <h6 class="card-title">{item.title}</h6>
+                    <p class="card-text">{results}...</p>
+                    <button
+                      class="btn btn-danger"
+                      type="button"
+                      onClick={() => deleteItems(item.id)}
+                    >
+                      Remove from favorites
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
     {/* LATEST MOVIES SECTION*/}
     <h1 className="text-left mt-5">Popular</h1>
       {movielatest.map((item, index) => {
@@ -33,7 +68,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, romancemovies, upcom
                         </p>
                         <button class="btn btn-primary button" 
                         type="button"
-                        onClick={() => upcomingbutton(item.id)}
+                     
                         >Add to Favorite
                         </button>
                       </div>
@@ -63,7 +98,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, romancemovies, upcom
                           {results}...
                         </p>
                         <button class="btn btn-danger button " 
-                        onClick={() => upcomingbutton(item.id)}
+                        onClick={() => favoriteUpcoming(item.id)}
                         type="button">Add to Favorite</button>
                       </div>
                     </div>
@@ -90,7 +125,7 @@ const Section = ({ movielatest, futureMovies, comedyMovies, romancemovies, upcom
                           {results}...
                         </p>
                         <button class="btn btn-primary button " 
-                        onClick={() => upcomingbutton(item.id)}
+                        onClick={() => favoriteRomance(item.id)}
                         type="button">Add to Favorite</button>
                       </div>
                     </div>
@@ -98,35 +133,34 @@ const Section = ({ movielatest, futureMovies, comedyMovies, romancemovies, upcom
               );
             })}
           </div>
-          {/* FAVORITE MOVIES SECTION*/}
-        <h1 className="text-left mt-5">Favorite List</h1>
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-          {moviefav.map((item, index) => {
-            let results = item.overview.substr(0, 60);
-            return (
-              <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-                <div class="card h-100">
-                  <img
-                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                    class="img-fluid"
-                    alt="img"
-                  />
-                  <div class="card-body">
-                    <h6 class="card-title">{item.title}</h6>
-                    <p class="card-text">{results}...</p>
-                    <button
-                      class="btn btn-danger"
-                      type="button"
-                      onClick={() => deleteItems(item.id)}
-                    >
-                      Remove from favorites
-                    </button>
-                  </div>
+      {/* COMEDY MOVIES SECTION*/}
+      <h1 className="text-left mt-5">Comedy</h1>
+          <div className="row row-cols-1 row-cols-md-3 g-4 mb-5">
+            {slicingComedy.map((item, index) => {
+              let results = item.overview.substr(0,60)
+              return (
+                  <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
+                    <div key={index} class="card h-100">
+                      <img
+                        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                        class="img-fluid"
+                        alt="img"
+                      />
+                      <div class="card-body">
+                        <h6 class="card-title">{item.title}</h6>
+                        <p class="card-text">
+                          {results}...
+                        </p>
+                        <button class="btn btn-primary button " 
+                        onClick={() => favoriteComedy(item.id)}
+                        type="button">Add to Favorite</button>
+                      </div>
+                    </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        
     </div>
   );
 };
