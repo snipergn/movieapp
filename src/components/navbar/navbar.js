@@ -1,6 +1,6 @@
 import NetflixLogo from "../Assets/netflixlogo.png";
 
-const Navbar = () => {
+const Navbar = ({searchMovie, searchmovievalue}) => {
   return (
     <div className="App">
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -38,7 +38,9 @@ const Navbar = () => {
               class="form-control mr-sm-2"
               type="search"
               placeholder="Search"
-              aria-label="Search"            
+              aria-label="Search"
+              onChange={searchMovie}
+              value={searchmovievalue}            
             />
           </form>
           <ul class="navbar-nav">

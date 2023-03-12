@@ -16,6 +16,8 @@ class App extends React.Component {
       comedymovies: [],
       romancemovies: [],
       favoriteList: [],
+      searchmovie: 'Superman',
+      querymovie: []
 
     };
     this.handleHeader = this.handleHeader.bind(this);
@@ -23,9 +25,10 @@ class App extends React.Component {
     this.deleteToFavorite = this.deleteToFavorite.bind(this);
     this.addToFavoriteRomance = this.addToFavoriteRomance.bind(this);
     this.addToFavoriteComedy = this.addToFavoriteComedy.bind(this);
+    this.SearchMovies = this.SearchMovies.bind(this);
   }
 
-  handleHeader = () => {
+  handleHeader = (data) => {
     const api = "399de7528a6f7ce137d42429f7513ad0";
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${api}&language=en-US&page=1`;
     fetch(url)
@@ -61,6 +64,15 @@ class App extends React.Component {
           romancemovies: data.results
         });
       });
+    const searchQuery =`https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`
+    fetch(searchQuery)
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({
+        querymovie: data.results
+      })
+    })  
+
   };
 
   // #1 Click the button and add the element into a new list with id, items etc.
@@ -89,13 +101,26 @@ class App extends React.Component {
     this.setState({ favoriteList: hapus });
   };
 
+  SearchMovies = (event) => {
+    this.setState({
+      searchmovie: event.target.value
+    })
+    let searchmovies = this.state.searchmovie
+    this.handleHeader(searchmovies)
+  }
+  
+
+
 
   componentDidMount() {
     this.handleHeader();
   }
 
   render() {
-   console.log(this.state.favoriteList)
+  //  console.log(this.state.searchmovie)
+   const {searchmovie, querymovie} = this.state;
+    console.log(searchmovie)
+    console.log(querymovie)
     return (
       <div className="App">
         {/*
@@ -123,8 +148,12 @@ class App extends React.Component {
               path="/"
               element={
                 <div>
-                  <Navbar />
-                  <Header movielatest={this.state.popularmovies} />
+                  <Navbar 
+                    searchmovievalue = {this.state.searchmovie}
+                    searchMovie = {this.SearchMovies}
+                  />
+                  <Header 
+                    movielatest={this.state.popularmovies} />
                   <Section 
                     favoriteComedy={this.addToFavoriteComedy}
                     favoriteRomance={this.addToFavoriteRomance}

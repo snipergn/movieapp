@@ -3,14 +3,14 @@ import "./section.css";
 
 const Section = ({ movielatest, futureMovies, comedyMovies, 
   romancemovies, favoriteUpcoming, moviefav, 
-  deleteItems, favoriteRomance, favoriteComedy}) => {
+  deleteItems, favoriteRomance, favoriteComedy, searchMovie}) => {
 
 
-  let romanceSlicing = romancemovies.map(item => item)
-  let slicing = romanceSlicing.slice(0, 6)
-  let futureSlicing = futureMovies.map(item => item)
-  let slicingFuture = futureSlicing.slice(0, 6)
-  let mapingComedy = comedyMovies.map(item => item)
+  const romanceSlicing = romancemovies.map(item => item)
+  const slicing = romanceSlicing.slice(0, 6)
+  const futureSlicing = futureMovies.map(item => item)
+  const slicingFuture = futureSlicing.slice(0, 6)
+  const mapingComedy = comedyMovies.map(item => item)
   const slicingComedy = mapingComedy.slice(0, 6)
 
 
