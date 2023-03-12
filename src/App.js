@@ -17,55 +17,44 @@ class App extends React.Component {
       comedymovies: [],
       romancemovies: [],
       favoriteList: [],
-      searchmovie: "Superman",
+      searchmovie: "",
       querymovie: [],
     };
   }
-
   handleHeader = (data) => {
     const api = "399de7528a6f7ce137d42429f7513ad0";
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${api}&language=en-US&page=1`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        let movieconcat = this.state.popularmovies.concat(data);
-        let filtered = movieconcat.filter((filter) => filter === data);
+    const urls = [
+        `https://api.themoviedb.org/3/movie/popular?api_key=${api}&language=en-US&page=1`,
+        `https://api.themoviedb.org/3/discover/movie?api_key=${api}&with_genres=35`,
+        `https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`,
+        `https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`,
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`
+
+      ]
+      Promise.all(urls.map(url => {
+        return fetch(url).then(data=> data.json())
+      }))
+      
+      .then(data => {
+        let movieconcat = this.state.popularmovies.concat(data[0]);
+        let filtered = movieconcat.filter((filter) => filter === data[0]);
         this.setState({
           popularmovies: filtered,
         });
-      });
-    const urlupcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`;
-    fetch(urlupcoming)
-      .then((response) => response.json())
-      .then((data) => {
         this.setState({
-          upcomingmovies: data.results,
+          comedymovies: data[1].results,
         });
-      });
-    const getGen = `https://api.themoviedb.org/3/discover/movie?api_key=${api}&with_genres=35`;
-    fetch(getGen)
-      .then((response) => response.json())
-      .then((data) => {
         this.setState({
-          comedymovies: data.results,
+          romancemovies: data[2].results,
         });
-      });
-    const Romance = `https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`;
-    fetch(Romance)
-      .then((response) => response.json())
-      .then((data) => {
         this.setState({
-          romancemovies: data.results,
+          querymovie: data[3].results,
         });
-      });
-    const searchQuery = `https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`;
-    fetch(searchQuery)
-      .then((response) => response.json())
-      .then((data) => {
         this.setState({
-          querymovie: data.results,
+          upcomingmovies: data[4].results,
         });
-      });
+      })
+   
   };
 
   // #1 Click the button and add the element into a new list with id, items etc.
@@ -112,15 +101,12 @@ class App extends React.Component {
   }
 
   render() {
-     console.log(this.state.favoriteList)
-    
+    console.log(this.state.romancemovies)    
     return (
       <div className="App">
         {/*
       1.Frontend Page
-        -> Main Page
         -> Login && Register Page by User Data/ID
-        -> My list when you can add a move or remove from it.
         -> Navbar list + Logo
         -> Search Movie by title
         -> Sign Out Header for Account
@@ -154,8 +140,6 @@ class App extends React.Component {
                     futureMovies={this.state.upcomingmovies}
                     comedyMovies={this.state.comedymovies}
                     romancemovies={this.state.romancemovies}
-                    moviefav={this.state.favoriteList}
-                    deleteItems={this.deleteToFavorite}
                   />
                   <Footer />
                 </div>
@@ -168,8 +152,8 @@ class App extends React.Component {
               element={
                 <div>
                   <Navbar
-                  // searchmovievalue = {this.state.searchmovie}
-                  // searchMovie = {this.SearchMovies}
+                  searchmovievalue = {this.state.searchmovie}
+                  searchMovie = {this.SearchMovies}
                   />
                   <Favorite 
                    />
