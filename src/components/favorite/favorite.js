@@ -14,10 +14,23 @@ class Favorite extends React.Component  {
           }
          this.setState({favoriteList: favorite})
       }
+      
+    handleRedirect = () => {
+        localStorage.setItem('favoriteItem',
+        JSON.stringify(this.state.favoriteList));
+    }
 
+    deleteToFavorite = (id) => {
+      const hapus = this.state.favoriteList.filter((item) => item.id !== id);
+      this.setState({ favoriteList: hapus });
+    };
+  
+    
     render() {
-        console.log(this.state.favoriteList)
         const {favoriteList} = this.state
+        console.log(favoriteList)
+        const {deleteToFavorite} = this
+
     return (
       <div>
         {/* FAVORITE MOVIES SECTION */}
@@ -27,7 +40,7 @@ class Favorite extends React.Component  {
             let results = item.overview.substr(0, 60);
             return (
               <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-                <div class="card h-100">
+                <div key ={index} class="card h-100">
                   <img
                     src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                     class="img-fluid"
@@ -39,7 +52,7 @@ class Favorite extends React.Component  {
                     <button
                       class="btn btn-danger"
                       type="button"
-                      
+                      onClick={() => deleteToFavorite(item.id)}
                     >
                       Remove from favorites
                     </button>

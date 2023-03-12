@@ -20,12 +20,6 @@ class App extends React.Component {
       searchmovie: "Superman",
       querymovie: [],
     };
-    this.handleHeader = this.handleHeader.bind(this);
-    this.addToFavoriteUpcoming = this.addToFavoriteUpcoming.bind(this);
-    this.deleteToFavorite = this.deleteToFavorite.bind(this);
-    this.addToFavoriteRomance = this.addToFavoriteRomance.bind(this);
-    this.addToFavoriteComedy = this.addToFavoriteComedy.bind(this);
-    this.SearchMovies = this.SearchMovies.bind(this);
   }
 
   handleHeader = (data) => {
@@ -99,11 +93,6 @@ class App extends React.Component {
     this.handleRedirect();
   };
 
-  deleteToFavorite = (id) => {
-    const hapus = this.state.favoriteList.filter((item) => item.id !== id);
-    this.setState({ favoriteList: hapus });
-  };
-
   SearchMovies = (event) => {
     this.setState({
       searchmovie: event.target.value,
@@ -112,16 +101,18 @@ class App extends React.Component {
     this.handleHeader(searchmovies);
   };
 
-  handleRedirect = (e) => {
+  handleRedirect = () => {
     localStorage.setItem('favorite',
     JSON.stringify(this.state.favoriteList));
   }
+
+
   componentDidMount() {
     this.handleHeader();
   }
 
   render() {
-    //  console.log(this.state.searchmovie)
+     console.log(this.state.favoriteList)
     
     return (
       <div className="App">
@@ -180,7 +171,8 @@ class App extends React.Component {
                   // searchmovievalue = {this.state.searchmovie}
                   // searchMovie = {this.SearchMovies}
                   />
-                  <Favorite moviefav={this.state.favoriteList} />
+                  <Favorite 
+                   />
                   <Footer />
                 </div>
               }
