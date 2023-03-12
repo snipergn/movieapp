@@ -7,6 +7,7 @@ import Section from "./components/section/section";
 import Footer from "./components/footer/footer";
 import Signin from "./components/signin/singin";
 import Register from "./components/register/register";
+import Favorite from "./components/favorite/favorite";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -16,9 +17,8 @@ class App extends React.Component {
       comedymovies: [],
       romancemovies: [],
       favoriteList: [],
-      searchmovie: 'Superman',
-      querymovie: []
-
+      searchmovie: "Superman",
+      querymovie: [],
     };
     this.handleHeader = this.handleHeader.bind(this);
     this.addToFavoriteUpcoming = this.addToFavoriteUpcoming.bind(this);
@@ -61,66 +61,68 @@ class App extends React.Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({
-          romancemovies: data.results
+          romancemovies: data.results,
         });
       });
-    const searchQuery =`https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`
+    const searchQuery = `https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`;
     fetch(searchQuery)
-    .then((response) => response.json())
-    .then((data) => {
-      this.setState({
-        querymovie: data.results
-      })
-    })  
-
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          querymovie: data.results,
+        });
+      });
   };
 
   // #1 Click the button and add the element into a new list with id, items etc.
-  addToFavoriteUpcoming = id => {
-    const upcomingmovies = this.state.upcomingmovies.find(item => item.id === id);
+  addToFavoriteUpcoming = (id) => {
+    const upcomingmovies = this.state.upcomingmovies.find(
+      (item) => item.id === id
+    );
     this.setState({
-      favoriteList: [...this.state.favoriteList, upcomingmovies]
+      favoriteList: [...this.state.favoriteList, upcomingmovies],
     });
+    this.handleRedirect();
   };
-  addToFavoriteComedy = id => {
-    const comedy =  this.state.comedymovies.find(item => item.id === id);
-      this.setState({
-        favoriteList: [...this.state.favoriteList, comedy]
-      });
-
-  };
-  addToFavoriteRomance = id => {
-    const romance =  this.state.romancemovies.find(item => item.id === id);
+  addToFavoriteComedy = (id) => {
+    const comedy = this.state.comedymovies.find((item) => item.id === id);
     this.setState({
-      favoriteList: [...this.state.favoriteList, romance]
+      favoriteList: [...this.state.favoriteList, comedy],
     });
+    this.handleRedirect();
+  };
+  addToFavoriteRomance = (id) => {
+    const romance = this.state.romancemovies.find((item) => item.id === id);
+    this.setState({
+      favoriteList: [...this.state.favoriteList, romance],
+    });
+    this.handleRedirect();
   };
 
-  deleteToFavorite = id => {
-    const hapus = this.state.favoriteList.filter(item => item.id !== id);
+  deleteToFavorite = (id) => {
+    const hapus = this.state.favoriteList.filter((item) => item.id !== id);
     this.setState({ favoriteList: hapus });
   };
 
   SearchMovies = (event) => {
     this.setState({
-      searchmovie: event.target.value
-    })
-    let searchmovies = this.state.searchmovie
-    this.handleHeader(searchmovies)
+      searchmovie: event.target.value,
+    });
+    let searchmovies = this.state.searchmovie;
+    this.handleHeader(searchmovies);
+  };
+
+  handleRedirect = (e) => {
+    localStorage.setItem('favorite',
+    JSON.stringify(this.state.favoriteList));
   }
-  
-
-
-
   componentDidMount() {
     this.handleHeader();
   }
 
   render() {
-  //  console.log(this.state.searchmovie)
-   const {searchmovie, querymovie} = this.state;
-    console.log(searchmovie)
-    console.log(querymovie)
+    //  console.log(this.state.searchmovie)
+    
     return (
       <div className="App">
         {/*
@@ -148,13 +150,12 @@ class App extends React.Component {
               path="/"
               element={
                 <div>
-                  <Navbar 
-                    searchmovievalue = {this.state.searchmovie}
-                    searchMovie = {this.SearchMovies}
+                  <Navbar
+                    searchmovievalue={this.state.searchmovie}
+                    searchMovie={this.SearchMovies}
                   />
-                  <Header 
-                    movielatest={this.state.popularmovies} />
-                  <Section 
+                  <Header movielatest={this.state.popularmovies} />
+                  <Section
                     favoriteComedy={this.addToFavoriteComedy}
                     favoriteRomance={this.addToFavoriteRomance}
                     favoriteUpcoming={this.addToFavoriteUpcoming}
@@ -170,6 +171,20 @@ class App extends React.Component {
               }
             />
             <Route exact path="/signin" element={<Signin />} />
+            <Route
+              exact
+              path="/favoritelist"
+              element={
+                <div>
+                  <Navbar
+                  // searchmovievalue = {this.state.searchmovie}
+                  // searchMovie = {this.SearchMovies}
+                  />
+                  <Favorite moviefav={this.state.favoriteList} />
+                  <Footer />
+                </div>
+              }
+            />
             <Route exact path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>

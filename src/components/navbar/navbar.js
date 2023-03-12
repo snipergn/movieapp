@@ -28,7 +28,12 @@ const Navbar = ({searchMovie, searchmovievalue}) => {
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="/">
-                Main Page <span class="sr-only">(current)</span>
+                Main Page
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/favoritelist">
+                Favorite
               </a>
             </li>
             
