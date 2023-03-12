@@ -9,6 +9,7 @@ const Section = ({
   favoriteUpcoming,
   favoriteRomance,
   favoriteComedy,
+  favoriteLatest
 }) => {
   const romanceSlicing = romancemovies.map((item) => item);
   const slicing = romanceSlicing.slice(0, 6);
@@ -28,17 +29,19 @@ const Section = ({
             {filterAPI.map((item, index) => {
               let results = item.overview.substr(0, 60);
               return (
-                <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-                  <div key={index} class="card h-100">
+                <div key={index} className="col-lg-2 col-md-4 col-sm-6 mt-3">
+                  <div key={index} className="card h-100">
                     <img
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                      class="img-fluid"
+                      className="img-fluid"
                       alt="img"
                     />
-                    <div class="card-body">
-                      <h6 class="card-title">{item.title}</h6>
-                      <p class="card-text">{results}...</p>
-                      <button class="btn btn-primary button" type="button">
+                    <div className="card-body">
+                      <h6 className="card-title">{item.title}</h6>
+                      <p className="card-text">{results}...</p>
+                      <button className="btn btn-primary button" type="button"
+                      onClick={() => favoriteLatest(item.id)}
+                      >
                         Add to Favorite
                       </button>
                     </div>
@@ -55,18 +58,18 @@ const Section = ({
         {slicingFuture.map((item, index) => {
           let results = item.overview.substr(0, 60);
           return (
-            <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-              <div key={index} class="card h-100">
+            <div key={index} className="col-lg-2 col-md-4 col-sm-6 mt-3">
+              <div  className="card h-100">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                  class="img-fluid"
+                  className="img-fluid"
                   alt="img"
                 />
-                <div class="card-body">
-                  <h6 class="card-title">{item.title}</h6>
-                  <p class="card-text">{results}...</p>
+                <div className="card-body">
+                  <h6 className="card-title">{item.title}</h6>
+                  <p className="card-text">{results}...</p>
                   <button
-                    class="btn btn-danger button "
+                    className="btn btn-danger button "
                     onClick={() => favoriteUpcoming(item.id)}
                     type="button"
                   >
@@ -84,18 +87,18 @@ const Section = ({
         {slicing.map((item, index) => {
           let results = item.overview.substr(0, 60);
           return (
-            <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-              <div key={index} class="card h-100">
+            <div key={index}className="col-lg-2 col-md-4 col-sm-6 mt-3">
+              <div className="card h-100">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                  class="img-fluid"
+                  className="img-fluid"
                   alt="img"
                 />
-                <div class="card-body">
-                  <h6 class="card-title">{item.title}</h6>
-                  <p class="card-text">{results}...</p>
+                <div className="card-body">
+                  <h6 className="card-title">{item.title}</h6>
+                  <p className="card-text">{results}...</p>
                   <button
-                    class="btn btn-primary button "
+                    className="btn btn-primary button "
                     onClick={() => favoriteRomance(item.id)}
                     type="button"
                   >
@@ -113,18 +116,18 @@ const Section = ({
         {slicingComedy.map((item, index) => {
           let results = item.overview.substr(0, 60);
           return (
-            <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-              <div key={index} class="card h-100">
+            <div key={index} className="col-lg-2 col-md-4 col-sm-6 mt-3">
+              <div  className="card h-100">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                  class="img-fluid"
+                  className="img-fluid"
                   alt="img"
                 />
-                <div class="card-body">
-                  <h6 class="card-title">{item.title}</h6>
-                  <p class="card-text">{results}...</p>
+                <div className="card-body">
+                  <h6 className="card-title">{item.title}</h6>
+                  <p className="card-text">{results}...</p>
                   <button
-                    class="btn btn-primary button "
+                    className="btn btn-primary button "
                     onClick={() => favoriteComedy(item.id)}
                     type="button"
                   >

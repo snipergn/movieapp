@@ -41,8 +41,8 @@ class Favorite extends React.Component {
           {favoriteList.map((item, index) => {
             let results = item.overview.substr(0, 60);
             return (
-              <div class="col-lg-2 col-md-4 col-sm-6 mt-3">
-                <div key={index} class="card h-100">
+              <div key={index} class="col-lg-2 col-md-4 col-sm-6 mt-3">
+                <div class="card h-100">
                   <img
                     src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                     class="img-fluid"

@@ -5,7 +5,7 @@ const Header = ({ movielatest }) => {
     <div>
       {movielatest.map((item, index) => {
         return (
-          <div
+          <div key={index}
             id="carouselExampleControls"
             class="carousel slide"
             data-ride="carousel"
