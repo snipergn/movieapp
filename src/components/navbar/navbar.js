@@ -1,6 +1,7 @@
 import NetflixLogo from "../Assets/netflixlogo.png";
 
-const Navbar = ({searchMovie, searchmovievalue}) => {
+const Navbar = ({searchMovie, searchmovievalue, handleMouseOver, handleMouseOut}) => {
+
   return (
     <div className="App">
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -38,8 +39,10 @@ const Navbar = ({searchMovie, searchmovievalue}) => {
             </li>
             
           </ul>
-          <form class="form-inline my-2 my-lg-0">
+          <form 
+            class="form-inline my-2 my-lg-0 inputpress">
             <input
+              onMouseOver={handleMouseOver}
               class="form-control mr-sm-2"
               type="search"
               placeholder="Search"
@@ -47,6 +50,8 @@ const Navbar = ({searchMovie, searchmovievalue}) => {
               onChange={searchMovie}
               value={searchmovievalue}            
             />
+            {handleMouseOver &&
+            <button type="button" onClick={handleMouseOut} className="btn btn-danger mr-4 ml-1">Exit</button>}
           </form>
           <ul class="navbar-nav">
             <li class="nav-item ">

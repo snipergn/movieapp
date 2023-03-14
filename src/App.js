@@ -8,6 +8,7 @@ import Footer from "./components/footer/footer";
 import Signin from "./components/signin/singin";
 import Register from "./components/register/register";
 import Favorite from "./components/favorite/favorite";
+import SearchMovies from "./components/searchResults/search";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,43 +20,45 @@ class App extends React.Component {
       favoriteList: [],
       searchmovie: "",
       querymovie: [],
+      isHovering: false,
     };
+    this.handleClickOver = this.handleClickOver.bind(this);
+    this.handleClickOut = this.handleClickOut.bind(this);
   }
   handleHeader = (data) => {
     const api = "399de7528a6f7ce137d42429f7513ad0";
     const urls = [
-        `https://api.themoviedb.org/3/movie/popular?api_key=${api}&language=en-US&page=1`,
-        `https://api.themoviedb.org/3/discover/movie?api_key=${api}&with_genres=35`,
-        `https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`,
-        `https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`,
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`
-      ]
-      Promise.all(urls.map(url => {
-        return fetch(url).then(data => data.json())
-      }))
-      .then(data => {
-        let movieconcat = this.state.popularmovies.concat(data[0]);
-        let filtered = movieconcat.filter((filter) => filter === data[0]);
-        this.setState({
-          popularmovies: filtered,
-        });
-        this.setState({
-          comedymovies: data[1].results,
-        });
-        this.setState({
-          romancemovies: data[2].results,
-        });
-        this.setState({
-          querymovie: data[3].results,
-        });
-        this.setState({
-          upcomingmovies: data[4].results,
-        });
+      `https://api.themoviedb.org/3/movie/popular?api_key=${api}&language=en-US&page=1`,
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api}&with_genres=35`,
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`,
+      `https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`,
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`,
+    ];
+    Promise.all(
+      urls.map((url) => {
+        return fetch(url).then((data) => data.json());
       })
-   
+    ).then((data) => {
+      let movieconcat = this.state.popularmovies.concat(data[0]);
+      let filtered = movieconcat.filter((filter) => filter === data[0]);
+      this.setState({
+        popularmovies: filtered,
+      });
+      this.setState({
+        comedymovies: data[1].results,
+      });
+      this.setState({
+        romancemovies: data[2].results,
+      });
+      this.setState({
+        querymovie: data[3].results,
+      });
+      this.setState({
+        upcomingmovies: data[4].results,
+      });
+    });
   };
 
-  // #1 Click the button and add the element into a new list with id, items etc.
   addToFavoriteUpcoming = (id) => {
     const upcomingmovies = this.state.upcomingmovies.find(
       (item) => item.id === id
@@ -80,11 +83,19 @@ class App extends React.Component {
     this.handleRedirect();
   };
   addToFavoriteLatest = (id) => {
-    const latest = this.state.popularmovies.map(item => item.results)
-    const object = latest[Object.keys(latest)[0]]
+    const latest = this.state.popularmovies.map((item) => item.results);
+    const object = latest[Object.keys(latest)[0]];
     const latestmap = object.find((item) => item.id === id);
     this.setState({
       favoriteList: [...this.state.favoriteList, latestmap],
+    });
+    this.handleRedirect();
+  };
+
+  addToFavoriteQuery = (id) => {
+    const queryItems = this.state.querymovie.find((item) => item.id === id);
+    this.setState({
+      favoriteList: [...this.state.favoriteList, queryItems],
     });
     this.handleRedirect();
   };
@@ -98,17 +109,32 @@ class App extends React.Component {
   };
 
   handleRedirect = () => {
-    localStorage.setItem('favorite',
-    JSON.stringify(this.state.favoriteList));
+    localStorage.setItem("favorite", JSON.stringify(this.state.favoriteList));
+  };
+
+  handleClickOver() {
+    setTimeout(() => {
+      this.setState(() => ({
+        isHovering: true,
+      }));
+    }, 2000);
   }
 
+  handleClickOut() {
+    setTimeout(() => {
+      this.setState(() => ({
+        isHovering: false,
+      }));
+    }, 2000);
+  }
 
   componentDidMount() {
     this.handleHeader();
   }
 
   render() {
-    console.log(this.state.querymovie)    
+    console.log(this.state.querymovie);
+    const { isHovering, searchmovie } = this.state;
     return (
       <div className="App">
         {/*
@@ -128,49 +154,74 @@ class App extends React.Component {
       */}
 
         <BrowserRouter>
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <div>
-                  <Navbar
-                    searchmovievalue={this.state.searchmovie}
-                    searchMovie={this.SearchMovies}
+          {isHovering && searchmovie.length > 4
+          ? (
+            <div>
+              <Navbar
+                searchmovievalue={this.state.searchmovie}
+                searchMovie={this.SearchMovies}
+                handleMouseOver={this.handleClickOver}
+                handleMouseOut={this.handleClickOut}
+                isHovering={this.state.isHovering}
+              />
+              <SearchMovies
+                queryMovies={this.state.querymovie}
+                addToFavoriteQuery={this.addToFavoriteQuery}
+              />
+              <Footer />
+            </div>
+          ) : (
+            <Routes>
+                <>
+                  <Route
+                    exact
+                    path={"/"}
+                    element={
+                      <div>
+                        <Navbar
+                          searchmovievalue={this.state.searchmovie}
+                          searchMovie={this.SearchMovies}
+                          handleMouseOver={this.handleClickOver}
+                          handleMouseOut={this.handleClickOut}
+                          isHovering={this.state.isHovering}
+                        />
+                        <Header movielatest={this.state.popularmovies} />
+                        <Section
+                          favoriteComedy={this.addToFavoriteComedy}
+                          favoriteRomance={this.addToFavoriteRomance}
+                          favoriteUpcoming={this.addToFavoriteUpcoming}
+                          movielatest={this.state.popularmovies}
+                          futureMovies={this.state.upcomingmovies}
+                          comedyMovies={this.state.comedymovies}
+                          romancemovies={this.state.romancemovies}
+                          favoriteLatest={this.addToFavoriteLatest}
+                        />
+                        <Footer />
+                      </div>
+                    }
                   />
-                  <Header movielatest={this.state.popularmovies} />
-                  <Section
-                    favoriteComedy={this.addToFavoriteComedy}
-                    favoriteRomance={this.addToFavoriteRomance}
-                    favoriteUpcoming={this.addToFavoriteUpcoming}
-                    movielatest={this.state.popularmovies}
-                    futureMovies={this.state.upcomingmovies}
-                    comedyMovies={this.state.comedymovies}
-                    romancemovies={this.state.romancemovies}
-                    favoriteLatest={this.addToFavoriteLatest}
+                  <Route
+                    exact
+                    path="/favoritelist"
+                    element={
+                      <div>
+                        <Navbar
+                          searchmovievalue={this.state.searchmovie}
+                          searchMovie={this.SearchMovies}
+                          handleMouseOver={this.handleClickOver}
+                          handleMouseOut={this.handleClickOut}
+                          isHovering={this.state.isHovering}
+                        />
+                        <Favorite />
+                        <Footer />
+                      </div>
+                    }
                   />
-                  <Footer />
-                </div>
-              }
-            />
-            <Route exact path="/signin" element={<Signin />} />
-            <Route
-              exact
-              path="/favoritelist"
-              element={
-                <div>
-                  <Navbar
-                  searchmovievalue = {this.state.searchmovie}
-                  searchMovie = {this.SearchMovies}
-                  />
-                  <Favorite 
-                   />
-                  <Footer />
-                </div>
-              }
-            />
-            <Route exact path="/register" element={<Register />} />
-          </Routes>
+                </>
+              <Route exact path="/signin" element={<Signin />} />
+              <Route exact path="/register" element={<Register />} />
+            </Routes>
+          )}
         </BrowserRouter>
       </div>
     );
