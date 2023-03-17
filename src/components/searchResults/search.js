@@ -1,14 +1,10 @@
 import React from "react";
 
 class SearchMovies extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      favoriteList: [],
-    };
-  }
+  
   render() {
-    const {queryMovies, addToFavoriteQuery} = this.props
+    const {queryMovies, addToFavoriteQuery, favoriteList} = this.props
+    console.log(favoriteList)
     return (
       <div>
         <div className="mt-2 ml-5 mr-5">

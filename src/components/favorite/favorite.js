@@ -29,7 +29,6 @@ class Favorite extends React.Component {
 
   render() {
     const { favoriteList } = this.state;
-    console.log(favoriteList);
     const { deleteToFavorite } = this;
 
     return (

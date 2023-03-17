@@ -9,7 +9,8 @@ const Section = ({
   favoriteUpcoming,
   favoriteRomance,
   favoriteComedy,
-  favoriteLatest
+  favoriteLatest,
+  iconURL
 }) => {
   const romanceSlicing = romancemovies.map((item) => item);
   const slicing = romanceSlicing.slice(0, 6);
@@ -17,11 +18,12 @@ const Section = ({
   const slicingFuture = futureSlicing.slice(0, 6);
   const mapingComedy = comedyMovies.map((item) => item);
   const slicingComedy = mapingComedy.slice(0, 6);
-
+  
+  console.log(iconURL)
   return (
     <div className="mt-2 ml-5 mr-5">
       {/* LATEST MOVIES SECTION*/}
-      <h1 className="text-left mt-5">Popular</h1>
+      <h1 className="text-left mt-5">Popular Now</h1>
       {movielatest.map((item, index) => {
         let filterAPI = item.results.slice(0, 6);
         return (
@@ -37,7 +39,13 @@ const Section = ({
                       alt="img"
                     />
                     <div className="card-body">
-                      <h6 className="card-title">{item.title}</h6>
+                      <h6 className="card-title">{item.title} <br/>
+                      {item.id === favoriteLatest
+                      && <div>
+                        <p>Hellooooo</p>
+                      </div>
+                      }
+                      </h6>
                       <p className="card-text">{results}...</p>
                       <button className="btn btn-primary button" type="button"
                       onClick={() => favoriteLatest(item.id)}
@@ -68,6 +76,7 @@ const Section = ({
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>
                   <p className="card-text">{results}...</p>
+                  <p className="card-text"> Release date <br/> <strong>{item.release_date}</strong></p>
                   <button
                     className="btn btn-danger button "
                     onClick={() => favoriteUpcoming(item.id)}

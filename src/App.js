@@ -9,6 +9,7 @@ import Signin from "./components/signin/singin";
 import Register from "./components/register/register";
 import Favorite from "./components/favorite/favorite";
 import SearchMovies from "./components/searchResults/search";
+import Details from "./components/detailsPage/details";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,12 +21,14 @@ class App extends React.Component {
       favoriteList: [],
       searchmovie: "",
       querymovie: [],
+      movieDetails: [],
       isHovering: false,
+      favoriteIcon: ""
     };
     this.handleClickOver = this.handleClickOver.bind(this);
     this.handleClickOut = this.handleClickOut.bind(this);
   }
-  handleHeader = (data) => {
+  handleHeader = (data, movie_id) => {
     const api = "399de7528a6f7ce137d42429f7513ad0";
     const urls = [
       `https://api.themoviedb.org/3/movie/popular?api_key=${api}&language=en-US&page=1`,
@@ -33,6 +36,7 @@ class App extends React.Component {
       `https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`,
       `https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`,
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`,
+      `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${api}&language=en-US`,
     ];
     Promise.all(
       urls.map((url) => {
@@ -56,9 +60,14 @@ class App extends React.Component {
       this.setState({
         upcomingmovies: data[4].results,
       });
+      this.setState({
+        movieDetails: data[5],
+      });
     });
   };
-
+  favoriteIconURL = () => {
+    this.setState({favoriteIcon: "https://github.com/snipergn/movieapp/blob/main/src/components/Assets/star-icon.png"})
+  }
   addToFavoriteUpcoming = (id) => {
     const upcomingmovies = this.state.upcomingmovies.find(
       (item) => item.id === id
@@ -86,6 +95,7 @@ class App extends React.Component {
     const latest = this.state.popularmovies.map((item) => item.results);
     const object = latest[Object.keys(latest)[0]];
     const latestmap = object.find((item) => item.id === id);
+
     this.setState({
       favoriteList: [...this.state.favoriteList, latestmap],
     });
@@ -112,29 +122,32 @@ class App extends React.Component {
     localStorage.setItem("favorite", JSON.stringify(this.state.favoriteList));
   };
 
-  handleClickOver() {
+  handleClickOver = () => {
     setTimeout(() => {
       this.setState(() => ({
         isHovering: true,
       }));
     }, 2000);
-  }
+  };
 
-  handleClickOut() {
-    setTimeout(() => {
-      this.setState(() => ({
-        isHovering: false,
-      }));
-    }, 2000);
-  }
+  handleClickOut = () => {
+    this.setState(() => ({
+      isHovering: false,
+    }));
+  };
+
+  handleDetails = (id) => {
+    this.handleHeader(...this.state.querymovie, id);
+  };
 
   componentDidMount() {
     this.handleHeader();
   }
 
   render() {
-    console.log(this.state.querymovie);
-    const { isHovering, searchmovie } = this.state;
+    const { isHovering, searchmovie, favoriteIcon, favoriteList } = this.state;
+    // console.log(upcomingmovies);
+    console.log(favoriteList)
     return (
       <div className="App">
         {/*
@@ -154,8 +167,7 @@ class App extends React.Component {
       */}
 
         <BrowserRouter>
-          {isHovering && searchmovie.length > 4
-          ? (
+          {isHovering && searchmovie.length > 4 ? (
             <div>
               <Navbar
                 searchmovievalue={this.state.searchmovie}
@@ -167,57 +179,69 @@ class App extends React.Component {
               <SearchMovies
                 queryMovies={this.state.querymovie}
                 addToFavoriteQuery={this.addToFavoriteQuery}
+                favoriteList={this.state.favoriteList}
               />
               <Footer />
             </div>
           ) : (
             <Routes>
-                <>
-                  <Route
-                    exact
-                    path={"/"}
-                    element={
-                      <div>
-                        <Navbar
-                          searchmovievalue={this.state.searchmovie}
-                          searchMovie={this.SearchMovies}
-                          handleMouseOver={this.handleClickOver}
-                          handleMouseOut={this.handleClickOut}
-                          isHovering={this.state.isHovering}
-                        />
-                        <Header movielatest={this.state.popularmovies} />
-                        <Section
-                          favoriteComedy={this.addToFavoriteComedy}
-                          favoriteRomance={this.addToFavoriteRomance}
-                          favoriteUpcoming={this.addToFavoriteUpcoming}
-                          movielatest={this.state.popularmovies}
-                          futureMovies={this.state.upcomingmovies}
-                          comedyMovies={this.state.comedymovies}
-                          romancemovies={this.state.romancemovies}
-                          favoriteLatest={this.addToFavoriteLatest}
-                        />
-                        <Footer />
-                      </div>
-                    }
-                  />
-                  <Route
-                    exact
-                    path="/favoritelist"
-                    element={
-                      <div>
-                        <Navbar
-                          searchmovievalue={this.state.searchmovie}
-                          searchMovie={this.SearchMovies}
-                          handleMouseOver={this.handleClickOver}
-                          handleMouseOut={this.handleClickOut}
-                          isHovering={this.state.isHovering}
-                        />
-                        <Favorite />
-                        <Footer />
-                      </div>
-                    }
-                  />
-                </>
+              <>
+                {/* <Route
+                  exact
+                  path="/moviedetails"
+                  element={
+                    <div>
+                      <Details handleInfoDetails={this.handleDetails} />
+                    </div>
+                  }
+                /> */}
+                <Route
+                  exact
+                  path={"/"}
+                  element={
+                    <div>
+                      <Navbar
+                        searchmovievalue={this.state.searchmovie}
+                        searchMovie={this.SearchMovies}
+                        handleMouseOver={this.handleClickOver}
+                        handleMouseOut={this.handleClickOut}
+                        isHovering={this.state.isHovering}
+                      />
+                      <Header movielatest={this.state.popularmovies} />
+                      <Section
+                        favoriteComedy={this.addToFavoriteComedy}
+                        favoriteRomance={this.addToFavoriteRomance}
+                        favoriteUpcoming={this.addToFavoriteUpcoming}
+                        movielatest={this.state.popularmovies}
+                        futureMovies={this.state.upcomingmovies}
+                        comedyMovies={this.state.comedymovies}
+                        romancemovies={this.state.romancemovies}
+                        favoriteLatest={this.addToFavoriteLatest}
+                        iconURL={this.state.iconURL}
+                        iconURLSumbit={this.favoriteIconURL}
+                      />
+                      <Footer />
+                    </div>
+                  }
+                />
+                <Route
+                  exact
+                  path="/favoritelist"
+                  element={
+                    <div>
+                      <Navbar
+                        searchmovievalue={this.state.searchmovie}
+                        searchMovie={this.SearchMovies}
+                        handleMouseOver={this.handleClickOver}
+                        handleMouseOut={this.handleClickOut}
+                        isHovering={this.state.isHovering}
+                      />
+                      <Favorite />
+                      <Footer />
+                    </div>
+                  }
+                />
+              </>
               <Route exact path="/signin" element={<Signin />} />
               <Route exact path="/register" element={<Register />} />
             </Routes>
