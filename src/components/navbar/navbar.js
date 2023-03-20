@@ -28,13 +28,18 @@ const Navbar = ({searchMovie, searchmovievalue, handleMouseOver, handleMouseOut}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/">
+              <a class="nav-link active" href="/">
                 Main Page
               </a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="/favoritelist">
-                Favorite
+                Favorite list
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#home">
+                Discover
               </a>
             </li>
             

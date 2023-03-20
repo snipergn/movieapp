@@ -1,4 +1,6 @@
 import React from "react";
+import Noimage from './Assets/notfound.png'
+
 
 class SearchMovies extends React.Component {
   
@@ -15,11 +17,18 @@ class SearchMovies extends React.Component {
             return (
               <div key={index} class="col-lg-2 col-md-4 col-sm-6 mt-3">
                 <div class="card h-100">
-                  <img
-                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                    class="img-fluid"
-                    alt="img"
-                  />
+                {item.poster_path
+                     ? <img
+                      src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                      className="img-fluid"
+                      alt="img"
+                    />
+                      : <img
+                      src={Noimage}
+                      className="img-fluid"
+                      alt="img"
+                    />
+                    }
                   <div class="card-body">
                     <h6 class="card-title">{item.title}</h6>
                     <p class="card-text">{results}...</p>

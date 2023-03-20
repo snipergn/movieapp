@@ -9,6 +9,7 @@ import Signin from "./components/signin/singin";
 import Register from "./components/register/register";
 import Favorite from "./components/favorite/favorite";
 import SearchMovies from "./components/searchResults/search";
+// import Discover from "./components/detailsPage/details";
 import Details from "./components/detailsPage/details";
 class App extends React.Component {
   constructor(props) {
@@ -23,20 +24,19 @@ class App extends React.Component {
       querymovie: [],
       movieDetails: [],
       isHovering: false,
-      favoriteIcon: ""
+      handleModal: false
     };
     this.handleClickOver = this.handleClickOver.bind(this);
     this.handleClickOut = this.handleClickOut.bind(this);
   }
-  handleHeader = (data, movie_id) => {
+  handleHeader = (data) => {
     const api = "399de7528a6f7ce137d42429f7513ad0";
     const urls = [
       `https://api.themoviedb.org/3/movie/popular?api_key=${api}&language=en-US&page=1`,
       `https://api.themoviedb.org/3/discover/movie?api_key=${api}&with_genres=35`,
       `https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`,
       `https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`,
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`,
-      `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${api}&language=en-US`,
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`
     ];
     Promise.all(
       urls.map((url) => {
@@ -60,14 +60,22 @@ class App extends React.Component {
       this.setState({
         upcomingmovies: data[4].results,
       });
-      this.setState({
-        movieDetails: data[5],
-      });
     });
   };
-  favoriteIconURL = () => {
-    this.setState({favoriteIcon: "https://github.com/snipergn/movieapp/blob/main/src/components/Assets/star-icon.png"})
-  }
+
+  handleDetailsPage = (id) => {
+    const api = '399de7528a6f7ce137d42429f7513ad0';
+    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${api}&language=en-US`
+    fetch(url)
+    .then((response) => response.json())
+    .then(data => {
+      this.setState({
+        movieDetails: data
+      });
+    })
+  };
+
+  
   addToFavoriteUpcoming = (id) => {
     const upcomingmovies = this.state.upcomingmovies.find(
       (item) => item.id === id
@@ -136,18 +144,30 @@ class App extends React.Component {
     }));
   };
 
+  handleMovieModalTrue = (id) => {
+    this.setState(() => ({
+      handleModal: true
+    }))
+  }
+  handleMovieModalFalse = (id) => {
+    this.setState(() => ({
+      handleModal: true
+    }))
+  }
+
   handleDetails = (id) => {
     this.handleHeader(...this.state.querymovie, id);
   };
 
+
   componentDidMount() {
     this.handleHeader();
+    this.handleDetailsPage();
   }
 
   render() {
-    const { isHovering, searchmovie, favoriteIcon, favoriteList } = this.state;
-    // console.log(upcomingmovies);
-    console.log(favoriteList)
+    const { isHovering, searchmovie, movieDetails } = this.state;
+
     return (
       <div className="App">
         {/*
@@ -156,6 +176,10 @@ class App extends React.Component {
         -> Navbar list + Logo
         -> Search Movie by title
         -> Sign Out Header for Account
+        -> Details about Movies
+        -> Review Movies.
+        -> Discover Movies
+        -> 
       2. Backend
         -> Crypt Data with Hash (Bycrypt)
         -> GET user details from frontend
@@ -217,9 +241,14 @@ class App extends React.Component {
                         comedyMovies={this.state.comedymovies}
                         romancemovies={this.state.romancemovies}
                         favoriteLatest={this.addToFavoriteLatest}
-                        iconURL={this.state.iconURL}
-                        iconURLSumbit={this.favoriteIconURL}
+                        handleDetailsPage={this.handleDetailsPage}
                       />
+                      { movieDetails ==! null
+                      ? <Details
+                      showData = {this.state.movieDetails}
+                      />
+                      : console.log('error')
+                      }
                       <Footer />
                     </div>
                   }

@@ -1,5 +1,6 @@
 import React from "react";
 import "./section.css";
+import Noimage from './Assets/notfound.png'
 
 const Section = ({
   movielatest,
@@ -10,7 +11,7 @@ const Section = ({
   favoriteRomance,
   favoriteComedy,
   favoriteLatest,
-  iconURL
+  handleDetailsPage
 }) => {
   const romanceSlicing = romancemovies.map((item) => item);
   const slicing = romanceSlicing.slice(0, 6);
@@ -19,7 +20,6 @@ const Section = ({
   const mapingComedy = comedyMovies.map((item) => item);
   const slicingComedy = mapingComedy.slice(0, 6);
   
-  console.log(iconURL)
   return (
     <div className="mt-2 ml-5 mr-5">
       {/* LATEST MOVIES SECTION*/}
@@ -33,18 +33,22 @@ const Section = ({
               return (
                 <div key={index} className="col-lg-2 col-md-4 col-sm-6 mt-3">
                   <div key={index} className="card h-100">
-                    <img
+                  {item.poster_path
+                     ? <img
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid"
                       alt="img"
+                      onClick={() => handleDetailsPage(item.id)}
                     />
+                      : <img
+                      src={Noimage}
+                      className="img-fluid"
+                      alt="img"
+                      onClick={() => handleDetailsPage(item.id)}
+                    />
+                    }
                     <div className="card-body">
-                      <h6 className="card-title">{item.title} <br/>
-                      {item.id === favoriteLatest
-                      && <div>
-                        <p>Hellooooo</p>
-                      </div>
-                      }
+                      <h6 className="card-title">{item.title}
                       </h6>
                       <p className="card-text">{results}...</p>
                       <button className="btn btn-primary button" type="button"
@@ -68,11 +72,20 @@ const Section = ({
           return (
             <div key={index} className="col-lg-2 col-md-4 col-sm-6 mt-3">
               <div  className="card h-100">
-                <img
-                  src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                  className="img-fluid"
-                  alt="img"
-                />
+              {item.poster_path
+                     ? <img
+                      src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                      className="img-fluid"
+                      alt="img"
+                      onClick={() => handleDetailsPage(item.id)}
+                    />
+                      : <img
+                      src={Noimage}
+                      className="img-fluid"
+                      alt="img"
+                      onClick={() => handleDetailsPage(item.id)}
+                    />
+                  }
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>
                   <p className="card-text">{results}...</p>
@@ -98,11 +111,20 @@ const Section = ({
           return (
             <div key={index}className="col-lg-2 col-md-4 col-sm-6 mt-3">
               <div className="card h-100">
-                <img
-                  src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                  className="img-fluid"
-                  alt="img"
-                />
+              {item.poster_path
+                     ? <img
+                      src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                      className="img-fluid"
+                      alt="img"
+                      onClick={() => handleDetailsPage(item.id)}
+                    />
+                      : <img
+                      src={Noimage}
+                      className="img-fluid"
+                      alt="img"
+                      onClick={() => handleDetailsPage(item.id)}
+                    />
+                    }
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>
                   <p className="card-text">{results}...</p>
@@ -127,11 +149,20 @@ const Section = ({
           return (
             <div key={index} className="col-lg-2 col-md-4 col-sm-6 mt-3">
               <div  className="card h-100">
-                <img
-                  src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                  className="img-fluid"
-                  alt="img"
-                />
+              {item.poster_path
+                     ? <img
+                      src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                      className="img-fluid"
+                      alt="img"
+                      onClick={() => handleDetailsPage(item.id)}
+                    />
+                      : <img
+                      src={Noimage}
+                      className="img-fluid"
+                      alt="img"
+                      onClick={() => handleDetailsPage(item.id)}
+                    />
+                    }
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>
                   <p className="card-text">{results}...</p>
