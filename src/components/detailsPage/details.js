@@ -2,8 +2,8 @@ import React from "react";
 
 class Details extends React.Component {
   render() {
-    const {showData} = this.state
-    console.log(showData)
+    // const {showData} = this.state
+    // console.log(showData)
     return (
       <div>
         <div

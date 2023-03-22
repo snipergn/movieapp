@@ -25,6 +25,7 @@ class App extends React.Component {
       movieDetails: [],
       isHovering: false,
       handleModal: false
+
     };
     this.handleClickOver = this.handleClickOver.bind(this);
     this.handleClickOut = this.handleClickOut.bind(this);
@@ -84,6 +85,9 @@ class App extends React.Component {
       favoriteList: [...this.state.favoriteList, upcomingmovies],
     });
     this.handleRedirect();
+    this.setState({
+      handleModal: !this.state.handleModal
+    })
   };
   addToFavoriteComedy = (id) => {
     const comedy = this.state.comedymovies.find((item) => item.id === id);
@@ -144,20 +148,10 @@ class App extends React.Component {
     }));
   };
 
-  handleMovieModalTrue = (id) => {
-    this.setState(() => ({
-      handleModal: true
-    }))
-  }
-  handleMovieModalFalse = (id) => {
-    this.setState(() => ({
-      handleModal: true
-    }))
-  }
-
   handleDetails = (id) => {
     this.handleHeader(...this.state.querymovie, id);
   };
+
 
 
   componentDidMount() {
@@ -166,7 +160,8 @@ class App extends React.Component {
   }
 
   render() {
-    const { isHovering, searchmovie, movieDetails } = this.state;
+    const { isHovering, searchmovie, handleModal} = this.state;
+    console.log(handleModal)
 
     return (
       <div className="App">
@@ -243,11 +238,9 @@ class App extends React.Component {
                         favoriteLatest={this.addToFavoriteLatest}
                         handleDetailsPage={this.handleDetailsPage}
                       />
-                      { movieDetails ==! null
-                      ? <Details
-                      showData = {this.state.movieDetails}
+                      {handleModal &&
+                      <Details
                       />
-                      : console.log('error')
                       }
                       <Footer />
                     </div>
