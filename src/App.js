@@ -27,8 +27,7 @@ class App extends React.Component {
       handleModal: false
 
     };
-    this.handleClickOver = this.handleClickOver.bind(this);
-    this.handleClickOut = this.handleClickOut.bind(this);
+   
   }
   handleHeader = (data) => {
     const api = "399de7528a6f7ce137d42429f7513ad0";
@@ -81,9 +80,12 @@ class App extends React.Component {
     const upcomingmovies = this.state.upcomingmovies.find(
       (item) => item.id === id
     );
-    this.setState({
-      favoriteList: [...this.state.favoriteList, upcomingmovies],
-    });
+    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
+    if(!favoriteItems) {
+      this.setState({
+        favoriteList: [...this.state.favoriteList, upcomingmovies],
+      });
+    }
     this.handleRedirect();
     this.setState({
       handleModal: !this.state.handleModal
@@ -91,34 +93,47 @@ class App extends React.Component {
   };
   addToFavoriteComedy = (id) => {
     const comedy = this.state.comedymovies.find((item) => item.id === id);
-    this.setState({
-      favoriteList: [...this.state.favoriteList, comedy],
-    });
+    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
+    if(!favoriteItems) {
+      this.setState({
+        favoriteList: [...this.state.favoriteList, comedy],
+      });
+    }
     this.handleRedirect();
   };
   addToFavoriteRomance = (id) => {
     const romance = this.state.romancemovies.find((item) => item.id === id);
-    this.setState({
-      favoriteList: [...this.state.favoriteList, romance],
-    });
+    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
+    if (!favoriteItems) {
+      this.setState({
+        favoriteList: [...this.state.favoriteList, romance],
+      });
+    }
+    
     this.handleRedirect();
   };
   addToFavoriteLatest = (id) => {
     const latest = this.state.popularmovies.map((item) => item.results);
     const object = latest[Object.keys(latest)[0]];
     const latestmap = object.find((item) => item.id === id);
-
-    this.setState({
-      favoriteList: [...this.state.favoriteList, latestmap],
-    });
+    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
+    if(!favoriteItems) {
+      this.setState({
+        favoriteList: [...this.state.favoriteList, latestmap],
+      });
+    }
     this.handleRedirect();
   };
 
   addToFavoriteQuery = (id) => {
     const queryItems = this.state.querymovie.find((item) => item.id === id);
-    this.setState({
-      favoriteList: [...this.state.favoriteList, queryItems],
-    });
+    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
+
+    if(!favoriteItems) {
+      this.setState({
+        favoriteList: [...this.state.favoriteList, queryItems],
+      });
+    }    
     this.handleRedirect();
   };
 
@@ -162,7 +177,6 @@ class App extends React.Component {
   render() {
     const { isHovering, searchmovie, handleModal} = this.state;
     console.log(handleModal)
-
     return (
       <div className="App">
         {/*
@@ -205,15 +219,6 @@ class App extends React.Component {
           ) : (
             <Routes>
               <>
-                {/* <Route
-                  exact
-                  path="/moviedetails"
-                  element={
-                    <div>
-                      <Details handleInfoDetails={this.handleDetails} />
-                    </div>
-                  }
-                /> */}
                 <Route
                   exact
                   path={"/"}
@@ -238,9 +243,7 @@ class App extends React.Component {
                         favoriteLatest={this.addToFavoriteLatest}
                         handleDetailsPage={this.handleDetailsPage}
                       />
-                      {handleModal &&
-                      <Details
-                      />
+                      <Details/>
                       }
                       <Footer />
                     </div>

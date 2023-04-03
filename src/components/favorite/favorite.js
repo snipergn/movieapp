@@ -39,10 +39,10 @@ class Favorite extends React.Component {
         {/* FAVORITE MOVIES SECTION */}
         <h1 className="text-left mt-5">Favorite List</h1>
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          {favoriteList.map((item, index) => {
+          {favoriteList.map((item) => {
             let results = item.overview.substr(0, 60);
             return (
-              <div key={index} class="col-lg-2 col-md-4 col-sm-6 mt-3">
+              <div key={item.id} class="col-lg-2 col-md-4 col-sm-6 mt-3">
                 <div class="card h-100">
                 {item.poster_path
                      ? <img
