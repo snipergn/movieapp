@@ -50,13 +50,7 @@ const Section = ({
                       >
                         Add to Favorite
                       </button>
-                      <button
-                        className="btn btn-secondary button mt-2"
-                        type="button"
-                        onClick={handleModal}
-                      >
-                        Show more
-                      </button>
+                     
                     </div>
                   </div>
                 </div>
