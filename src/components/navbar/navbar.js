@@ -37,11 +37,7 @@ const Navbar = ({searchMovie, searchmovievalue, handleMouseOver, handleMouseOut}
                 Favorite list
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#home">
-                Discover
-              </a>
-            </li>
+           
             
           </ul>
           <form 

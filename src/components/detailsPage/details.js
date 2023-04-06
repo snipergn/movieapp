@@ -2,6 +2,7 @@ import React from "react";
 
 class Details extends React.Component {
   render() {
+    const showHideClassName = this.handleModal ? "modal display-block" : "modal display-none";
     return (
       <div>
         {
@@ -10,7 +11,7 @@ class Details extends React.Component {
           // Display information in order like netflix
         }
         <div
-          class="modal fade"
+          class= {showHideClassName}
           id="exampleModalCenter"
           tabindex="-1"
           role="dialog"
@@ -48,6 +49,7 @@ class Details extends React.Component {
             </div>
           </div>
         </div>
+        
       </div>
     );
   }

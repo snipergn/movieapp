@@ -10,6 +10,7 @@ const Section = ({
   favoriteRomance,
   favoriteComedy,
   favoriteLatest,
+  handleModal
 }) => {
   const romanceSlicing = romancemovies.map((item) => item);
   const slicing = romanceSlicing.slice(0, 6);
@@ -17,7 +18,7 @@ const Section = ({
   const slicingFuture = futureSlicing.slice(0, 6);
   const mapingComedy = comedyMovies.map((item) => item);
   const slicingComedy = mapingComedy.slice(0, 6);
-  
+
   return (
     <div className="mt-2 ml-5 mr-5">
       {/* LATEST MOVIES SECTION*/}
@@ -30,21 +31,31 @@ const Section = ({
               let results = item.overview.substr(0, 60);
               return (
                 <div key={item.id} className="col-lg-2 col-md-4 col-sm-6 mt-3">
-                  <div  className="card h-100">
+                  <div className="card h-100">
                     <img
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid"
                       alt="img"
+                      onClick={handleModal}
                     />
                     <div className="card-body">
-                      <h6 className="card-title">{item.title} <br/>
-    
+                      <h6 className="card-title">
+                        {item.title} <br />
                       </h6>
                       <p className="card-text">{results}...</p>
-                      <button className="btn btn-primary button" type="button"
-                      onClick={() => favoriteLatest(item.id)}
+                      <button
+                        className="btn btn-primary button"
+                        type="button"
+                        onClick={() => favoriteLatest(item.id)}
                       >
                         Add to Favorite
+                      </button>
+                      <button
+                        className="btn btn-secondary button mt-2"
+                        type="button"
+                        onClick={handleModal}
+                      >
+                        Show more
                       </button>
                     </div>
                   </div>
@@ -61,23 +72,28 @@ const Section = ({
           let results = item.overview.substr(0, 60);
           return (
             <div key={item.id} className="col-lg-2 col-md-4 col-sm-6 mt-3">
-              <div  className="card h-100">
+              <div className="card h-100">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                   className="img-fluid"
                   alt="img"
+                  onClick={handleModal}
                 />
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>
                   <p className="card-text">{results}...</p>
-                  <p className="card-text"> Release date <br/> <strong>{item.release_date}</strong></p>
+                  <p className="card-text">
+                    {" "}
+                    Release date <br /> <strong>{item.release_date}</strong>
+                  </p>
                   <button
-                    className="btn btn-danger button "
+                    className="btn btn-danger button mt-2"
                     onClick={() => favoriteUpcoming(item.id)}
                     type="button"
                   >
                     Add to Favorite
                   </button>
+                  
                 </div>
               </div>
             </div>
@@ -96,6 +112,7 @@ const Section = ({
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                   className="img-fluid"
                   alt="img"
+                  onClick={handleModal}
                 />
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>
@@ -107,6 +124,7 @@ const Section = ({
                   >
                     Add to Favorite
                   </button>
+                  
                 </div>
               </div>
             </div>
@@ -120,11 +138,12 @@ const Section = ({
           let results = item.overview.substr(0, 60);
           return (
             <div key={item.id} className="col-lg-2 col-md-4 col-sm-6 mt-3">
-              <div  className="card h-100">
+              <div className="card h-100">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                   className="img-fluid"
                   alt="img"
+                  onClick={handleModal}
                 />
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>
@@ -133,9 +152,11 @@ const Section = ({
                     className="btn btn-primary button "
                     onClick={() => favoriteComedy(item.id)}
                     type="button"
+                    
                   >
                     Add to Favorite
                   </button>
+                  
                 </div>
               </div>
             </div>

@@ -5,6 +5,10 @@
     width: 12rem;
     height: 50%;
 }
+.img-fluid:hover {
+    transform: scale(1.3);
+    transition: transform .5s ease;
+  }
 .card {
     max-width: 250px;
     max-height: auto;

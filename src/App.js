@@ -9,8 +9,8 @@ import Signin from "./components/signin/singin";
 import Register from "./components/register/register";
 import Favorite from "./components/favorite/favorite";
 import SearchMovies from "./components/searchResults/search";
-// import Discover from "./components/detailsPage/details";
 import Details from "./components/detailsPage/details";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -87,9 +87,9 @@ class App extends React.Component {
       });
     }
     this.handleRedirect();
-    this.setState({
-      handleModal: !this.state.handleModal
-    })
+    
+
+
   };
   addToFavoriteComedy = (id) => {
     const comedy = this.state.comedymovies.find((item) => item.id === id);
@@ -167,11 +167,15 @@ class App extends React.Component {
     this.handleHeader(...this.state.querymovie, id);
   };
 
-
-
   componentDidMount() {
     this.handleHeader();
     this.handleDetailsPage();
+  }
+
+  handleModalOn = () => {
+    this.setState({
+      handleModal: !this.state.handleModal
+    })
   }
 
   render() {
@@ -242,9 +246,14 @@ class App extends React.Component {
                         romancemovies={this.state.romancemovies}
                         favoriteLatest={this.addToFavoriteLatest}
                         handleDetailsPage={this.handleDetailsPage}
+                        handleModal={this.handleModalOn}
+                        
                       />
-                      <Details/>
-                      }
+                      <Details
+                        
+                        handleModalDisplay = {this.state.handleModal}
+                      />
+                      
                       <Footer />
                     </div>
                   }
