@@ -4,7 +4,7 @@ const Navbar = ({searchMovie, searchmovievalue, handleMouseOver, handleMouseOut}
 
   return (
     <div className="App">
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
           <img
             src={NetflixLogo}
@@ -41,7 +41,7 @@ const Navbar = ({searchMovie, searchmovievalue, handleMouseOver, handleMouseOut}
             
           </ul>
           <form 
-            class="form-inline my-2 my-lg-0 inputpress">
+            class="form-inline my-2 my-lg-0 inputpress d-flex justify-content-center">
             <input
               onMouseOver={handleMouseOver}
               class="form-control mr-sm-2"
@@ -52,7 +52,7 @@ const Navbar = ({searchMovie, searchmovievalue, handleMouseOver, handleMouseOut}
               value={searchmovievalue}            
             />
             {handleMouseOver &&
-            <button type="button" onClick={handleMouseOut} className="btn btn-danger mr-4 ml-1">Exit</button>}
+            <button type="button" onClick={handleMouseOut} className="btn btn-danger mt-2 mr-4 ml-1">Exit</button>}
           </form>
           <ul class="navbar-nav">
             <li class="nav-item ">

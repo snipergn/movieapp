@@ -9,8 +9,8 @@ import Signin from "./components/signin/singin";
 import Register from "./components/register/register";
 import Favorite from "./components/favorite/favorite";
 import SearchMovies from "./components/searchResults/search";
+// import Discover from "./components/detailsPage/details";
 import Details from "./components/detailsPage/details";
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +27,8 @@ class App extends React.Component {
       handleModal: false
 
     };
-   
+    this.handleClickOver = this.handleClickOver.bind(this);
+    this.handleClickOut = this.handleClickOut.bind(this);
   }
   handleHeader = (data) => {
     const api = "399de7528a6f7ce137d42429f7513ad0";
@@ -76,64 +77,53 @@ class App extends React.Component {
   };
 
   
+  ViewDetailsState = () => {
+    this.setState({
+      handleModal: !this.state.handleModal
+    })
+  }
+
+
   addToFavoriteUpcoming = (id) => {
     const upcomingmovies = this.state.upcomingmovies.find(
       (item) => item.id === id
     );
-    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
-    if(!favoriteItems) {
-      this.setState({
-        favoriteList: [...this.state.favoriteList, upcomingmovies],
-      });
-    }
+    this.setState({
+      favoriteList: [...this.state.favoriteList, upcomingmovies],
+    });
     this.handleRedirect();
-    
-
-
+   
   };
   addToFavoriteComedy = (id) => {
     const comedy = this.state.comedymovies.find((item) => item.id === id);
-    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
-    if(!favoriteItems) {
-      this.setState({
-        favoriteList: [...this.state.favoriteList, comedy],
-      });
-    }
+    this.setState({
+      favoriteList: [...this.state.favoriteList, comedy],
+    });
     this.handleRedirect();
   };
   addToFavoriteRomance = (id) => {
     const romance = this.state.romancemovies.find((item) => item.id === id);
-    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
-    if (!favoriteItems) {
-      this.setState({
-        favoriteList: [...this.state.favoriteList, romance],
-      });
-    }
-    
+    this.setState({
+      favoriteList: [...this.state.favoriteList, romance],
+    });
     this.handleRedirect();
   };
   addToFavoriteLatest = (id) => {
     const latest = this.state.popularmovies.map((item) => item.results);
     const object = latest[Object.keys(latest)[0]];
     const latestmap = object.find((item) => item.id === id);
-    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
-    if(!favoriteItems) {
-      this.setState({
-        favoriteList: [...this.state.favoriteList, latestmap],
-      });
-    }
+
+    this.setState({
+      favoriteList: [...this.state.favoriteList, latestmap],
+    });
     this.handleRedirect();
   };
 
   addToFavoriteQuery = (id) => {
     const queryItems = this.state.querymovie.find((item) => item.id === id);
-    const favoriteItems = this.state.favoriteList.find((fav) => fav.id === id)
-
-    if(!favoriteItems) {
-      this.setState({
-        favoriteList: [...this.state.favoriteList, queryItems],
-      });
-    }    
+    this.setState({
+      favoriteList: [...this.state.favoriteList, queryItems],
+    });
     this.handleRedirect();
   };
 
@@ -147,6 +137,7 @@ class App extends React.Component {
 
   handleRedirect = () => {
     localStorage.setItem("favorite", JSON.stringify(this.state.favoriteList));
+     
   };
 
   handleClickOver = () => {
@@ -165,22 +156,18 @@ class App extends React.Component {
 
   handleDetails = (id) => {
     this.handleHeader(...this.state.querymovie, id);
+    
   };
-
+  
   componentDidMount() {
     this.handleHeader();
     this.handleDetailsPage();
   }
 
-  handleModalOn = () => {
-    this.setState({
-      handleModal: !this.state.handleModal
-    })
-  }
-
   render() {
     const { isHovering, searchmovie, handleModal} = this.state;
     console.log(handleModal)
+
     return (
       <div className="App">
         {/*
@@ -223,6 +210,15 @@ class App extends React.Component {
           ) : (
             <Routes>
               <>
+                {/* <Route
+                  exact
+                  path="/moviedetails"
+                  element={
+                    <div>
+                      <Details handleInfoDetails={this.handleDetails} />
+                    </div>
+                  }
+                /> */}
                 <Route
                   exact
                   path={"/"}
@@ -246,14 +242,12 @@ class App extends React.Component {
                         romancemovies={this.state.romancemovies}
                         favoriteLatest={this.addToFavoriteLatest}
                         handleDetailsPage={this.handleDetailsPage}
-                        handleModal={this.handleModalOn}
-                        
+                        show={this.state.isHovering}
+                        onHide={() => this.ViewDetailsState()}
                       />
-                      <Details
-                        
-                        handleModalDisplay = {this.state.handleModal}
+                        <Details              
+                        show={this.state.isHovering}
                       />
-                      
                       <Footer />
                     </div>
                   }
@@ -278,6 +272,7 @@ class App extends React.Component {
               </>
               <Route exact path="/signin" element={<Signin />} />
               <Route exact path="/register" element={<Register />} />
+              
             </Routes>
           )}
         </BrowserRouter>

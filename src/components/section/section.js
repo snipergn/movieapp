@@ -11,6 +11,7 @@ const Section = ({
   favoriteComedy,
   favoriteLatest,
   handleModal
+  
 }) => {
   const romanceSlicing = romancemovies.map((item) => item);
   const slicing = romanceSlicing.slice(0, 6);
@@ -34,9 +35,10 @@ const Section = ({
                   <div className="card h-100">
                     <img
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                      className="img-fluid"
+                      className="img-fluid width: 100%"
                       alt="img"
                       onClick={handleModal}
+                   
                     />
                     <div className="card-body">
                       <h6 className="card-title">

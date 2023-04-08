@@ -1,8 +1,12 @@
 .image {
     max-height: 600px;
-    width:100%;
+    width: 100%;
     object-fit: cover;
-    height: 25%;
+    height: 100%;
     filter:brightness(40%); /* You can try with filter to give darkness to each image */
 
 }
+.carousel-caption {
+    padding-bottom: 10rem;
+}
+

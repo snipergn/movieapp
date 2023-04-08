@@ -4,6 +4,7 @@ const Header = ({ movielatest }) => {
   return (
     <div>
       {movielatest.map((item, index) => {
+        console.log(item.results[0])
         return (
           <div key={index}
             id="carouselExampleControls"
@@ -17,10 +18,15 @@ const Header = ({ movielatest }) => {
                   src={`https://image.tmdb.org/t/p/original/${item.results[0].poster_path}`}
                   alt="First slide"
                 />
-                <div class="carousel-caption d-none d-md-block">
-                  <h2>{item.results[0].title}</h2>
-                  <p>{item.results[0].overview}</p>
+                
+                <div class="carousel-caption d-none mb-5 d-md-block text-left">
+                  <h6>Movie</h6>
+                  <h1 className="mb-4">{item.results[0].title}</h1>
+                  <p className="display-linebreak">{item.results[0].overview}</p><br/>
+                  <button type="button" class="btn-lg btn-primary mt-2">Add to Favorite</button>
+                  <button type="button" class="btn-lg btn-secondary mt-2 ml-3">View More</button>
                 </div>
+                
               </div>
               <div class="carousel-item">
                 <img
@@ -28,9 +34,12 @@ const Header = ({ movielatest }) => {
                   src={`https://image.tmdb.org/t/p/original/${item.results[1].poster_path}`}
                   alt="Second slide"
                 />
-                <div class="carousel-caption d-none d-md-block">
-                  <h2>{item.results[1].title}</h2>
-                  <p>{item.results[1].overview}</p>
+                 <div class="carousel-caption d-none mb-5 d-md-block text-left">
+                  <h6>Movie</h6>
+                  <h1 className="mb-4">{item.results[1].title}</h1>
+                  <p className="display-linebreak">{item.results[1].overview}</p><br/>
+                  <button type="button" class="btn-lg btn-primary mt-2">Add to Favorite</button>
+                  <button type="button" class="btn-lg btn-secondary mt-2 ml-3">View More</button>
                 </div>
               </div>
 
@@ -40,9 +49,12 @@ const Header = ({ movielatest }) => {
                   src={`https://image.tmdb.org/t/p/original/${item.results[2].poster_path}`}
                   alt="Third slide"
                 />
-                <div class="carousel-caption d-none d-md-block">
-                  <h2>{item.results[2].title}</h2>
-                  <p>{item.results[2].overview}</p>
+                 <div class="carousel-caption d-none mb-5 d-md-block text-left">
+                  <h6>Movie</h6>
+                  <h1 className="mb-4">{item.results[2].title}</h1>
+                  <p className="display-linebreak">{item.results[2].overview}</p><br/>
+                  <button type="button" class="btn-lg btn-primary mt-2">Add to Favorite</button>
+                  <button type="button" class="btn-lg btn-secondary mt-2 ml-3">View More</button>
                 </div>
               </div>
               <div class="carousel-item">
@@ -51,9 +63,12 @@ const Header = ({ movielatest }) => {
                   src={`https://image.tmdb.org/t/p/original/${item.results[3].poster_path}`}
                   alt="Fourth slide"
                 />
-                <div class="carousel-caption d-none d-md-block">
-                  <h2>{item.results[3].title}</h2>
-                  <p>{item.results[3].overview}</p>
+                 <div class="carousel-caption d-none mb-5 d-md-block text-left">
+                  <h6>Movie</h6>
+                  <h1 className="mb-4">{item.results[2].title}</h1>
+                  <p className="display-linebreak">{item.results[2].overview} <br/></p>
+                  <button type="button" class="btn-lg btn-primary mt-2">Add to Favorite</button>
+                  <button type="button" class="btn-lg btn-secondary mt-2 ml-3">View More</button>
                 </div>
               </div>
             </div>
