@@ -5,8 +5,7 @@ import Noimage from './Assets/notfound.png'
 class SearchMovies extends React.Component {
   
   render() {
-    const {queryMovies, addToFavoriteQuery, favoriteList} = this.props
-    console.log(favoriteList)
+    const {queryMovies, addToFavoriteQuery} = this.props
     return (
       <div>
         <div className="mt-2 ml-5 mr-5">
@@ -14,9 +13,11 @@ class SearchMovies extends React.Component {
         <div className="row row-cols-1 row-cols-md-3 g-4">
           { queryMovies.map((item, index) => {
             let results = item.overview.substr(0, 60);
+           
             return (
+              
               <div key={index} class="col-lg-2 col-md-4 col-sm-6 mt-3">
-                <div class="card h-100">
+                ? <div class="card h-100">
                 {item.poster_path
                      ? <img
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
@@ -42,7 +43,8 @@ class SearchMovies extends React.Component {
                   </div>
                 </div>
               </div>
-            );
+            )
+  
           })}
           
         </div>

@@ -10,7 +10,8 @@ const Section = ({
   favoriteRomance,
   favoriteComedy,
   favoriteLatest,
-  handleModal
+  OnActive,
+  handleDetailsPage
   
 }) => {
   const romanceSlicing = romancemovies.map((item) => item);
@@ -37,7 +38,7 @@ const Section = ({
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid width: 100%"
                       alt="img"
-                      onClick={handleModal}
+                      onClick={() => handleDetailsPage(item.id)}
                    
                     />
                     <div className="card-body">
@@ -73,7 +74,7 @@ const Section = ({
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                   className="img-fluid"
                   alt="img"
-                  onClick={handleModal}
+                  onClick={() => OnActive(item.id)}
                 />
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>
@@ -108,7 +109,7 @@ const Section = ({
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                   className="img-fluid"
                   alt="img"
-                  onClick={handleModal}
+                  onClick={() => OnActive(item.id)}
                 />
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>
@@ -139,7 +140,7 @@ const Section = ({
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                   className="img-fluid"
                   alt="img"
-                  onClick={handleModal}
+                  onClick={() => OnActive(item.id)}
                 />
                 <div className="card-body">
                   <h6 className="card-title">{item.title}</h6>

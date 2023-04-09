@@ -2,12 +2,12 @@ import React from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const Details = (props) =>  {
-
+const Details = ({showModal, OnHide, idModalMovie}) =>  {
+  // const item = items.find(item => item.id === idModalMovie);
     return (
       <div>
         <Modal
-          {...props}
+          show={showModal} onHide={OnHide}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -26,7 +26,7 @@ const Details = (props) =>  {
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
+            <Button onClick={OnHide}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
