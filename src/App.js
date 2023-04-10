@@ -23,9 +23,6 @@ class App extends React.Component {
       querymovie: [],
       movieDetails: [],
       isHovering: false,
-      handleModal: false,
-    
-
     };
     this.handleClickOver = this.handleClickOver.bind(this);
     this.handleClickOut = this.handleClickOut.bind(this);
@@ -38,7 +35,6 @@ class App extends React.Component {
       `https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749&with_watch_monetization_types=flatrate`,
       `https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-US&query=${data}&page=1&include_adult=false`,
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1&region=US`,
-      `https://api.themoviedb.org/3/movie/76600?api_key=${api}&language=en-US`
     ];
     Promise.all(
       urls.map((url) => {
@@ -62,33 +58,32 @@ class App extends React.Component {
       this.setState({
         upcomingmovies: data[4].results,
       });
-      console.log(data[5])
     });
   };
 
   handleDetailsPage = (id) => {
-    const api = '399de7528a6f7ce137d42429f7513ad0';
-    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${api}&language=en-US`
+    const api = "399de7528a6f7ce137d42429f7513ad0";
+    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${api}&language=en-US`;
     fetch(url)
-    .then((response) => response.json())
-    .then(data => {
-      console.log(data)
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          movieDetails: [data],
+        });
+      });
   };
 
-  
-  ViewDetailsStateOpen = (i) => {
+  ViewDetailsStateOpen = (id) => {
     this.setState({
-      handleModal: true,
-    })
-    
-  }
-  ViewDetailsStateClose= () => {
+      isHovering: true,
+    });
+    this.handleDetailsPage(id);
+  };
+  ViewDetailsStateClose = () => {
     this.setState({
-      handleModal: false
-    })
-  }
-
+      isHovering: false,
+    });
+  };
 
   addToFavoriteUpcoming = (id) => {
     const upcomingmovies = this.state.upcomingmovies.find(
@@ -98,13 +93,14 @@ class App extends React.Component {
       favoriteList: [...this.state.favoriteList, upcomingmovies],
     });
     this.handleRedirect();
-   
   };
   addToFavoriteComedy = (id) => {
     const comedy = this.state.comedymovies.find((item) => item.id === id);
-    this.setState({
-      favoriteList: [...this.state.favoriteList, comedy],
-    });
+    if (!this.state.favoriteList) {
+      this.setState({
+        favoriteList: [...this.state.favoriteList, comedy],
+      });
+    }
     this.handleRedirect();
   };
   addToFavoriteRomance = (id) => {
@@ -143,7 +139,6 @@ class App extends React.Component {
 
   handleRedirect = () => {
     localStorage.setItem("favorite", JSON.stringify(this.state.favoriteList));
-     
   };
 
   handleClickOver = () => {
@@ -162,17 +157,16 @@ class App extends React.Component {
 
   handleDetails = (id) => {
     this.handleHeader(...this.state.querymovie, id);
-    
   };
-  
+
   componentDidMount() {
     this.handleHeader();
     this.handleDetailsPage();
   }
 
   render() {
-    const { isHovering, searchmovie, idModalMovie, movieDetails} = this.state;
-    
+    const { isHovering, searchmovie } = this.state;
+    console.log(this.state.movieDetails);
     return (
       <div className="App">
         {/*
@@ -212,7 +206,6 @@ class App extends React.Component {
           ) : (
             <Routes>
               <>
-                
                 <Route
                   exact
                   path={"/"}
@@ -236,15 +229,16 @@ class App extends React.Component {
                         romancemovies={this.state.romancemovies}
                         favoriteLatest={this.addToFavoriteLatest}
                         handleDetailsPage={this.handleDetailsPage}
-                        handleViewDetails = {this.ViewDetailsState}
-                        OnActive = {this.ViewDetailsStateOpen}
-                        
+                        handleViewDetails={this.ViewDetailsState}
+                        OnActive={this.ViewDetailsStateOpen}
                       />
-                        <Details              
-                      OnHide = {this.ViewDetailsStateClose}
-                      showModal = {this.state.handleModal}
-                      idFilter = {idModalMovie}
+
+                      <Details
+                        OnHide={this.ViewDetailsStateClose}
+                        showModal={this.state.isHovering}
+                        MovieDetails={this.state.movieDetails}
                       />
+
                       <Footer />
                     </div>
                   }
@@ -269,7 +263,6 @@ class App extends React.Component {
               </>
               <Route exact path="/signin" element={<Signin />} />
               <Route exact path="/register" element={<Register />} />
-              
             </Routes>
           )}
         </BrowserRouter>

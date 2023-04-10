@@ -2,15 +2,18 @@ import React from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const Details = ({showModal, OnHide, idModalMovie}) =>  {
-  // const item = items.find(item => item.id === idModalMovie);
+const Details = ({showModal, OnHide, MovieDetails}) =>  {
+
     return (
       <div>
-        <Modal
+      {showModal && MovieDetails?.map(item => {
+        return (
+          <Modal
           show={showModal} onHide={OnHide}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
+          key={item.id}
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -18,7 +21,7 @@ const Details = ({showModal, OnHide, idModalMovie}) =>  {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Centered Modal</h4>
+            <h4>{item.title}</h4>
             <p>
               Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
               dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
@@ -29,6 +32,11 @@ const Details = ({showModal, OnHide, idModalMovie}) =>  {
             <Button onClick={OnHide}>Close</Button>
           </Modal.Footer>
         </Modal>
+        )
+      }) 
+     
+      }
+      
       </div>
     );
 }

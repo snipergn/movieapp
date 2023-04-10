@@ -10,8 +10,7 @@ const Section = ({
   favoriteRomance,
   favoriteComedy,
   favoriteLatest,
-  OnActive,
-  handleDetailsPage
+  OnActive
   
 }) => {
   const romanceSlicing = romancemovies.map((item) => item);
@@ -38,7 +37,7 @@ const Section = ({
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid width: 100%"
                       alt="img"
-                      onClick={() => handleDetailsPage(item.id)}
+                      onClick={() => OnActive(item.id)}
                    
                     />
                     <div className="card-body">
