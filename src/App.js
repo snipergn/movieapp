@@ -85,42 +85,7 @@ class App extends React.Component {
     });
   };
 
-  addToFavoriteUpcoming = (id) => {
-    const upcomingmovies = this.state.upcomingmovies.find(
-      (item) => item.id === id
-    );
-    this.setState({
-      favoriteList: [...this.state.favoriteList, upcomingmovies],
-    });
-    this.handleRedirect();
-  };
-  addToFavoriteComedy = (id) => {
-    const comedy = this.state.comedymovies.find((item) => item.id === id);
-    if (!this.state.favoriteList) {
-      this.setState({
-        favoriteList: [...this.state.favoriteList, comedy],
-      });
-    }
-    this.handleRedirect();
-  };
-  addToFavoriteRomance = (id) => {
-    const romance = this.state.romancemovies.find((item) => item.id === id);
-    this.setState({
-      favoriteList: [...this.state.favoriteList, romance],
-    });
-    this.handleRedirect();
-  };
-  addToFavoriteLatest = (id) => {
-    const latest = this.state.popularmovies.map((item) => item.results);
-    const object = latest[Object.keys(latest)[0]];
-    const latestmap = object.find((item) => item.id === id);
-
-    this.setState({
-      favoriteList: [...this.state.favoriteList, latestmap],
-    });
-    this.handleRedirect();
-  };
-
+ 
   addToFavoriteQuery = (id) => {
     const queryItems = this.state.querymovie.find((item) => item.id === id);
     this.setState({
@@ -136,6 +101,14 @@ class App extends React.Component {
     let searchmovies = this.state.searchmovie;
     this.handleHeader(searchmovies);
   };
+
+  addToFavoriteDetails = (id) => {
+    const itemFilter = this.state.movieDetails.find((item) => item.id === id)
+    this.setState({
+      favoriteList: [...this.state.favoriteList, itemFilter],
+    });
+    this.handleRedirect();
+  }
 
   handleRedirect = () => {
     localStorage.setItem("favorite", JSON.stringify(this.state.favoriteList));
@@ -218,16 +191,16 @@ class App extends React.Component {
                         handleMouseOut={this.handleClickOut}
                         isHovering={this.state.isHovering}
                       />
-                      <Header movielatest={this.state.popularmovies} />
+                      <Header 
+                        movielatest={this.state.popularmovies} 
+                        
+                      />
                       <Section
-                        favoriteComedy={this.addToFavoriteComedy}
-                        favoriteRomance={this.addToFavoriteRomance}
-                        favoriteUpcoming={this.addToFavoriteUpcoming}
+                        
                         movielatest={this.state.popularmovies}
                         futureMovies={this.state.upcomingmovies}
                         comedyMovies={this.state.comedymovies}
                         romancemovies={this.state.romancemovies}
-                        favoriteLatest={this.addToFavoriteLatest}
                         handleDetailsPage={this.handleDetailsPage}
                         handleViewDetails={this.ViewDetailsState}
                         OnActive={this.ViewDetailsStateOpen}
@@ -237,6 +210,7 @@ class App extends React.Component {
                         OnHide={this.ViewDetailsStateClose}
                         showModal={this.state.isHovering}
                         MovieDetails={this.state.movieDetails}
+                        favorite={this.addToFavoriteDetails}
                       />
 
                       <Footer />

@@ -1,6 +1,6 @@
 import "./header.css";
 
-const Header = ({ movielatest }) => {
+const Header = ({ movielatest, favoriteLatest }) => {
   return (
     <div>
       {movielatest.map((item, index) => {
@@ -37,7 +37,10 @@ const Header = ({ movielatest }) => {
                   <h6>Movie</h6>
                   <h1 className="mb-4">{item.results[1].title}</h1>
                   <p className="display-linebreak">{item.results[1].overview}</p><br/>
-                  <button type="button" class="btn-lg btn-primary mt-2">Add to Favorite</button>
+                  <button type="button" class="btn-lg btn-primary mt-2"
+                  onClick={() => favoriteLatest(item.id)}>
+                  Add to Favorite
+                  </button>
                   <button type="button" class="btn-lg btn-secondary mt-2 ml-3">View More</button>
                 </div>
               </div>
@@ -52,7 +55,10 @@ const Header = ({ movielatest }) => {
                   <h6>Movie</h6>
                   <h1 className="mb-4">{item.results[2].title}</h1>
                   <p className="display-linebreak">{item.results[2].overview}</p><br/>
-                  <button type="button" class="btn-lg btn-primary mt-2">Add to Favorite</button>
+                  <button type="button" class="btn-lg btn-primary mt-2"
+                  onClick={() => favoriteLatest(item.id)}>
+                  Add to Favorite
+                  </button>
                   <button type="button" class="btn-lg btn-secondary mt-2 ml-3">View More</button>
                 </div>
               </div>
@@ -66,7 +72,10 @@ const Header = ({ movielatest }) => {
                   <h6>Movie</h6>
                   <h1 className="mb-4">{item.results[2].title}</h1>
                   <p className="display-linebreak">{item.results[2].overview} <br/></p>
-                  <button type="button" class="btn-lg btn-primary mt-2">Add to Favorite</button>
+                  <button type="button" class="btn-lg btn-primary mt-2"
+                  onClick={() => favoriteLatest(item.id)}>
+                  Add to Favorite
+                  </button>
                   <button type="button" class="btn-lg btn-secondary mt-2 ml-3">View More</button>
                 </div>
               </div>

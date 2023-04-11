@@ -31,8 +31,6 @@ class Favorite extends React.Component {
 
   render() {
     const { favoriteList } = this.state;
-    const { deleteToFavorite } = this;
-
     return (
       <div>
           <div className="mt-2 ml-5 mr-5">
@@ -40,33 +38,23 @@ class Favorite extends React.Component {
         <h1 className="text-left mt-5">Favorite List</h1>
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {favoriteList.map((item) => {
-            let results = item.overview.substr(0, 60);
             return (
-              <div key={item.id} class="col-lg-2 col-md-4 col-sm-6 mt-3">
+              <div key={item.id} class="col-lg-2 col-md-4 col-sm-6 mt-3 mb-5">
                 <div class="card h-100">
                 {item.poster_path
                      ? <img
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid"
                       alt="img"
+                      onClick={() => this.OnActive(item.id)}
                     />
                       : <img
                       src={Noimage}
                       className="img-fluid"
                       alt="img"
+                      onClick={() => this.OnActive(item.id)}
                     />
                     }
-                  <div class="card-body">
-                    <h6 class="card-title">{item.title}</h6>
-                    <p class="card-text">{results}...</p>
-                    <button
-                      class="btn btn-danger"
-                      type="button"
-                      onClick={() => deleteToFavorite(item.id)}
-                    >
-                      Remove from favorites
-                    </button>
-                  </div>
                 </div>
               </div>
             );

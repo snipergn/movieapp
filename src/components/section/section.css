@@ -3,7 +3,7 @@
 }
 .img-fluid  {
     width: 12rem;
-    height: 50%;
+    height: 100%;
 }
 .img-fluid:hover {
     transform: scale(1.3);
