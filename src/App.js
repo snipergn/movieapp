@@ -155,7 +155,6 @@ class App extends React.Component {
         -> POST register details from frotnend
         -> PUT -> When My list Add an object
         -> DELETE -> When remove an item from my list of movies.
-
       3. Database ?? (yet)
       */}
 
@@ -173,6 +172,7 @@ class App extends React.Component {
                 queryMovies={this.state.querymovie}
                 addToFavoriteQuery={this.addToFavoriteQuery}
                 favoriteList={this.state.favoriteList}
+                OnActive={this.ViewDetailsStateOpen}
               />
               <Footer />
             </div>
@@ -193,10 +193,8 @@ class App extends React.Component {
                       />
                       <Header 
                         movielatest={this.state.popularmovies} 
-                        
                       />
                       <Section
-                        
                         movielatest={this.state.popularmovies}
                         futureMovies={this.state.upcomingmovies}
                         comedyMovies={this.state.comedymovies}
@@ -205,14 +203,12 @@ class App extends React.Component {
                         handleViewDetails={this.ViewDetailsState}
                         OnActive={this.ViewDetailsStateOpen}
                       />
-
                       <Details
                         OnHide={this.ViewDetailsStateClose}
                         showModal={this.state.isHovering}
                         MovieDetails={this.state.movieDetails}
                         favorite={this.addToFavoriteDetails}
                       />
-
                       <Footer />
                     </div>
                   }
@@ -229,7 +225,10 @@ class App extends React.Component {
                         handleMouseOut={this.handleClickOut}
                         isHovering={this.state.isHovering}
                       />
-                      <Favorite />
+                      <Favorite 
+                        OnActive={this.ViewDetailsStateOpen}
+                        favorite={this.addToFavoriteDetails}
+                      />
                       <Footer />
                     </div>
                   }

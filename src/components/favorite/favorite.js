@@ -31,9 +31,10 @@ class Favorite extends React.Component {
 
   render() {
     const { favoriteList } = this.state;
+    const { OnActive } = this
     return (
       <div>
-          <div className="mt-2 ml-5 mr-5">
+        <div className="mt-2 ml-5 mr-5">
         {/* FAVORITE MOVIES SECTION */}
         <h1 className="text-left mt-5">Favorite List</h1>
         <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -46,13 +47,13 @@ class Favorite extends React.Component {
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => this.OnActive(item.id)}
+                      onClick={() => OnActive(item.id)}
                     />
                       : <img
                       src={Noimage}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => this.OnActive(item.id)}
+                      onClick={() => OnActive(item.id)}
                     />
                     }
                 </div>

@@ -3,10 +3,7 @@ import Noimage from './Assets/notfound.png'
 import './search.css'
 
 
-class SearchMovies extends React.Component {
-  
-  render() {
-    const {queryMovies} = this.props
+const SearchMovies = ({queryMovies, OnActive}) => {
     return (
       <div>
         <div className="mt-2 ml-5 mr-5">
@@ -21,27 +18,25 @@ class SearchMovies extends React.Component {
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => this.props.OnActive(item.id)}
+                      onClick={() => OnActive(item.id)}
                     />
                       : <img
                       src={Noimage}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => this.props.OnActive(item.id)}
+                      onClick={() => OnActive(item.id)}
                     />
                     }
                   
                 </div>
               </div>
             )
-  
           })}
-          
         </div>
         </div>
       </div>
     );
   }
-}
+
 
 export default SearchMovies;
