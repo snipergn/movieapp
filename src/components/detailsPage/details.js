@@ -9,7 +9,7 @@ const Details = ({
   MovieDetails,
   favorite,
 }) => {
-  console.log(MovieDetails, favorite);
+  console.log(MovieDetails);
   return (
     <div>
       {showModal &&

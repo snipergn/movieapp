@@ -47,7 +47,7 @@ class Favorite extends React.Component {
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => this.props.OnActive(item.id)}
+                      onClick={() => this.props.OnFavorite(item.id)}
                     />
                       : <img
                       src={Noimage}

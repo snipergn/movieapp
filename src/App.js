@@ -74,18 +74,6 @@ class App extends React.Component {
       });
   };
 
-  ViewDetailsStateOpen = (id) => {
-    this.setState({
-      isDetails: true,
-    });
-    this.handleDetailsPage(id);
-  };
-  ViewDetailsStateClose = () => {
-    this.setState({
-      isDetails: false,
-    });
-  };
-
  
   addToFavoriteQuery = (id) => {
     const queryItems = this.state.querymovie.find((item) => item.id === id);
@@ -135,6 +123,17 @@ class App extends React.Component {
     }));
   };
 
+  ViewDetailsStateOpen = (id) => {
+    this.setState({
+      isDetails: true,
+    });
+    this.handleDetailsPage(id);
+  };
+  ViewDetailsStateClose = () => {
+    this.setState({
+      isDetails: false,
+    });
+  };
   
 
   componentDidMount() {
@@ -143,8 +142,8 @@ class App extends React.Component {
   }
 
   render() {
-    const { isHovering, searchmovie } = this.state;
-    console.log(isHovering)
+    const { isHovering, searchmovie, isDetails } = this.state;
+    console.log(this.state.movieDetails, isDetails)
     return (
       <div className="App">
         {/*
@@ -177,8 +176,15 @@ class App extends React.Component {
                 queryMovies={this.state.querymovie}
                 addToFavoriteQuery={this.addToFavoriteQuery}
                 favoriteList={this.state.favoriteList}
-                OnActive={this.ViewDetailsStateOpen}
+                OnSearching={this.ViewDetailsStateOpen}
+                showModal={this.state.isDetails}
               />
+              <Details
+                        OnHide={this.ViewDetailsStateClose}
+                        showModal={this.state.isDetails}
+                        MovieDetails={this.state.movieDetails}
+                        favorite={this.addToFavoriteDetails}
+                      />
               <Footer />
             </div>
           ) : (
@@ -210,7 +216,7 @@ class App extends React.Component {
                       />
                       <Details
                         OnHide={this.ViewDetailsStateClose}
-                        showModal={this.state.isHovering}
+                        showModal={this.state.isDetails}
                         MovieDetails={this.state.movieDetails}
                         favorite={this.addToFavoriteDetails}
                       />
@@ -231,7 +237,13 @@ class App extends React.Component {
                         isHovering={this.state.isHovering}
                       />
                       <Favorite 
-                        OnActive={this.ViewDetailsStateOpen}
+                        OnFavorite ={this.ViewDetailsStateOpen}
+                        favorite={this.addToFavoriteDetails}
+                      />
+                      <Details
+                        OnHide={this.ViewDetailsStateClose}
+                        showModal={this.state.isDetails}
+                        MovieDetails={this.state.movieDetails}
                         favorite={this.addToFavoriteDetails}
                       />
                       <Footer />

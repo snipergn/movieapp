@@ -3,7 +3,7 @@ import Noimage from './Assets/notfound.png'
 import './search.css'
 
 
-const SearchMovies = ({queryMovies, OnActive}) => {
+const SearchMovies = ({queryMovies, OnSearching}) => {
     return (
       <div>
         <div className="mt-2 ml-5 mr-5">
@@ -18,13 +18,13 @@ const SearchMovies = ({queryMovies, OnActive}) => {
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => OnActive(item.id)}
+                      onClick={() => OnSearching(item.id)}
                     />
                       : <img
                       src={Noimage}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => OnActive(item.id)}
+                      onClick={() => OnSearching(item.id)}
                     />
                     }
                   
