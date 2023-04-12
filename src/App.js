@@ -23,6 +23,7 @@ class App extends React.Component {
       querymovie: [],
       movieDetails: [],
       isHovering: false,
+      isDetails: false
     };
     this.handleClickOver = this.handleClickOver.bind(this);
     this.handleClickOut = this.handleClickOut.bind(this);
@@ -75,22 +76,25 @@ class App extends React.Component {
 
   ViewDetailsStateOpen = (id) => {
     this.setState({
-      isHovering: true,
+      isDetails: true,
     });
     this.handleDetailsPage(id);
   };
   ViewDetailsStateClose = () => {
     this.setState({
-      isHovering: false,
+      isDetails: false,
     });
   };
 
  
   addToFavoriteQuery = (id) => {
     const queryItems = this.state.querymovie.find((item) => item.id === id);
-    this.setState({
-      favoriteList: [...this.state.favoriteList, queryItems],
-    });
+    if(!this.state.favoriteList.some(fav => fav.id === id)) {
+      this.setState({
+        favoriteList: [...this.state.favoriteList, queryItems],
+      });
+    }
+   
     this.handleRedirect();
   };
 
@@ -104,9 +108,12 @@ class App extends React.Component {
 
   addToFavoriteDetails = (id) => {
     const itemFilter = this.state.movieDetails.find((item) => item.id === id)
-    this.setState({
-      favoriteList: [...this.state.favoriteList, itemFilter],
-    });
+    if(!this.state.favoriteList.some(fav => fav.id === id)) {
+      this.setState({
+        favoriteList: [...this.state.favoriteList, itemFilter],
+      });
+    }
+    
     this.handleRedirect();
   }
 
@@ -128,9 +135,7 @@ class App extends React.Component {
     }));
   };
 
-  handleDetails = (id) => {
-    this.handleHeader(...this.state.querymovie, id);
-  };
+  
 
   componentDidMount() {
     this.handleHeader();
@@ -139,7 +144,7 @@ class App extends React.Component {
 
   render() {
     const { isHovering, searchmovie } = this.state;
-    console.log(this.state.movieDetails);
+    console.log(isHovering)
     return (
       <div className="App">
         {/*
@@ -166,7 +171,7 @@ class App extends React.Component {
                 searchMovie={this.SearchMovies}
                 handleMouseOver={this.handleClickOver}
                 handleMouseOut={this.handleClickOut}
-                isHovering={this.state.isHovering}
+                isHovering={isHovering}
               />
               <SearchMovies
                 queryMovies={this.state.querymovie}

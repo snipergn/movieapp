@@ -30,8 +30,8 @@ class Favorite extends React.Component {
   };
 
   render() {
+    console.log(this.state.favoriteList)
     const { favoriteList } = this.state;
-    const { OnActive } = this
     return (
       <div>
         <div className="mt-2 ml-5 mr-5">
@@ -47,13 +47,13 @@ class Favorite extends React.Component {
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => OnActive(item.id)}
+                      onClick={() => this.props.OnActive(item.id)}
                     />
                       : <img
                       src={Noimage}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => OnActive(item.id)}
+                      onClick={() => this.props.OnActive(item.id)}
                     />
                     }
                 </div>
