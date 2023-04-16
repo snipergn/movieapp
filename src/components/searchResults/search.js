@@ -9,8 +9,9 @@ const SearchMovies = ({queryMovies, OnSearching}) => {
         <div className="mt-2 ml-5 mr-5">
         {/* SEARCH MOVIES SECTION */}
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          { queryMovies.map((item, index) => {
+          {queryMovies.map((item, index) => {
             return (
+            
               <div key={index} class="col-lg-2 col-md-4 col-sm-6 mt-3">
               <div class="card h-100">
                 {item.poster_path
@@ -30,6 +31,7 @@ const SearchMovies = ({queryMovies, OnSearching}) => {
                   
                 </div>
               </div>
+
             )
           })}
         </div>

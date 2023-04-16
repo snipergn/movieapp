@@ -22,6 +22,7 @@ class App extends React.Component {
       searchmovie: "",
       querymovie: [],
       movieDetails: [],
+      videoAddress: [],
       isHovering: false,
       isDetails: false
     };
@@ -74,6 +75,18 @@ class App extends React.Component {
       });
   };
 
+  MovieVideoAddress = (id) => {
+    const api = "399de7528a6f7ce137d42429f7513ad0";
+    const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${api}&language=en-US`
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          videoAddress: data
+        });
+      });
+  }
+
  
   addToFavoriteQuery = (id) => {
     const queryItems = this.state.querymovie.find((item) => item.id === id);
@@ -82,7 +95,6 @@ class App extends React.Component {
         favoriteList: [...this.state.favoriteList, queryItems],
       });
     }
-   
     this.handleRedirect();
   };
 
@@ -128,6 +140,7 @@ class App extends React.Component {
       isDetails: true,
     });
     this.handleDetailsPage(id);
+    this.MovieVideoAddress(id);
   };
   ViewDetailsStateClose = () => {
     this.setState({
@@ -142,17 +155,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { isHovering, searchmovie, isDetails } = this.state;
-    console.log(this.state.movieDetails, isDetails)
+    const { isHovering, searchmovie} = this.state;
     return (
       <div className="App">
         {/*
-      1.Frontend Page
-        -> Login && Register Page by User Data/ID
-        -> Navbar list + Logo
-        -> Search Movie by title
-        -> Sign Out Header for Account
-        -> Details about Movies
       2. Backend
         -> Crypt Data with Hash (Bycrypt)
         -> GET user details from frontend
@@ -180,11 +186,12 @@ class App extends React.Component {
                 showModal={this.state.isDetails}
               />
               <Details
-                        OnHide={this.ViewDetailsStateClose}
-                        showModal={this.state.isDetails}
-                        MovieDetails={this.state.movieDetails}
-                        favorite={this.addToFavoriteDetails}
-                      />
+                OnHide={this.ViewDetailsStateClose}
+                showModal={this.state.isDetails}
+                MovieDetails={this.state.movieDetails}
+                favorite={this.addToFavoriteDetails}
+                videoAddress = {this.state.videoAddress}
+                />
               <Footer />
             </div>
           ) : (
@@ -219,6 +226,7 @@ class App extends React.Component {
                         showModal={this.state.isDetails}
                         MovieDetails={this.state.movieDetails}
                         favorite={this.addToFavoriteDetails}
+                        videoAddress = {this.state.videoAddress}
                       />
                       <Footer />
                     </div>
@@ -245,6 +253,7 @@ class App extends React.Component {
                         showModal={this.state.isDetails}
                         MovieDetails={this.state.movieDetails}
                         favorite={this.addToFavoriteDetails}
+                        videoAddress = {this.state.videoAddress}
                       />
                       <Footer />
                     </div>

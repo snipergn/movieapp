@@ -3,17 +3,12 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./details.css";
 
-const Details = ({
-  showModal,
-  OnHide,
-  MovieDetails,
-  favorite,
-}) => {
-  console.log(MovieDetails);
+const Details = ({ showModal, OnHide, MovieDetails, favorite, videoAddress }) => {
   return (
     <div>
       {showModal &&
         MovieDetails?.map((item) => {
+          const itemRound = Math.round(item.popularity);
           return (
             <Modal
               show={showModal}
@@ -33,8 +28,37 @@ const Details = ({
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <h4>{item.title}</h4>
-                <p>{item.overview}</p>
+                <h4>
+                  <strong>Title: </strong>
+                  {item.title}
+                </h4>
+                <p>
+                  <strong>Overview:</strong> {item.overview}
+                </p>
+                <p>
+                  <strong>Popularity:</strong> {itemRound}
+                </p>
+                <p>
+                  <strong>Release Date: </strong> {item.release_date}
+                </p>
+                <p>
+                  <strong>Website:</strong> {item.homepage}
+                </p>
+                <div>
+                { videoAddress.map(item => {
+                    <iframe
+                    width="853"
+                    height="480"
+                    src={`https://www.youtube.com/embed/${item.results[0].id}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title="Embedded youtube"
+                  />
+                  
+                })
+                  
+                  }
+                </div>
               </Modal.Body>
               <Modal.Footer>
                 <Button
@@ -43,7 +67,9 @@ const Details = ({
                 >
                   Add to Favorite
                 </Button>
-                <Button className={"btn btn-secondary button"} onClick={OnHide}>Close</Button>
+                <Button className={"btn btn-secondary button"} onClick={OnHide}>
+                  Close
+                </Button>
               </Modal.Footer>
             </Modal>
           );

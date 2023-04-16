@@ -9,7 +9,27 @@ import {
  
 } from "mdb-react-ui-kit";
 
-const Register = () => {
+class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      password: "",
+      email: ""
+    }
+  }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    fetch('/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: this.state.email, password: this.state.password, name: this.state.name})
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+  }
+  render() {
   return (
     <MDBContainer fluid>
       <MDBRow className="d-flex justify-content-center align-items-center h-100 mt-5">
@@ -29,6 +49,8 @@ const Register = () => {
                 id="formControlLg"
                 type="email"
                 size="lg"
+                value={this.state.email} 
+                onChange={e => this.setState({ email: e.target.value })}
               />
               <MDBInput
                 wrapperClass="mb-4 w-100"
@@ -36,6 +58,8 @@ const Register = () => {
                 id="formControlLg"
                 type="password"
                 size="lg"
+                value={this.state.password} 
+                onChange={e => this.setState({ password: e.target.value })}
               />
                <MDBInput
                 wrapperClass="mb-4 w-100"
@@ -43,6 +67,8 @@ const Register = () => {
                 id="formControlLg"
                 type="name"
                 size="lg"
+                value={this.state.name} 
+                onChange={e => this.setState({ name: e.target.value })}
               />
             <a type="button" className="btn btn-primary btn-lg" href="/">Register</a>
             <p className="mt-3">You have account? <a className="hyperlink" href="/signin">Login Now</a></p>
@@ -53,5 +79,6 @@ const Register = () => {
     </MDBContainer>
   );
 };
+}
 
 export default Register;
