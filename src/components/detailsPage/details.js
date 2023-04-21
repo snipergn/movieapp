@@ -3,7 +3,14 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./details.css";
 
-const Details = ({ showModal, OnHide, MovieDetails, favorite, videoAddress }) => {
+const Details = ({
+  showModal,
+  OnHide,
+  MovieDetails,
+  favorite,
+  videoAddress,
+}) => {
+  const itemResults = videoAddress[0]
   return (
     <div>
       {showModal &&
@@ -41,23 +48,27 @@ const Details = ({ showModal, OnHide, MovieDetails, favorite, videoAddress }) =>
                 <p>
                   <strong>Release Date: </strong> {item.release_date}
                 </p>
-                <p>
-                  <strong>Website:</strong> {item.homepage}
-                </p>
+                {item.homepage ? (
+                  <p>
+                    <strong>Website:</strong> {item.homepage}
+                  </p>
+                ) : (
+                  <p>
+                    <strong>Website:</strong> Not Found
+                  </p>
+                )}
                 <div>
-                { videoAddress.map(item => {
-                    <iframe
-                    width="853"
+                <h1>Trailer 1</h1>
+                { itemResults &&
+                  <iframe
+                    width="770"
                     height="480"
-                    src={`https://www.youtube.com/embed/${item.results[0].id}`}
+                    src={`https://www.youtube.com/embed/${itemResults.id}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     title="Embedded youtube"
                   />
-                  
-                })
-                  
-                  }
+                }
                 </div>
               </Modal.Body>
               <Modal.Footer>

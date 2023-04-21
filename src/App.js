@@ -81,10 +81,12 @@ class App extends React.Component {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        if(data) 
         this.setState({
-          videoAddress: data
+          videoAddress: data.results
         });
-      });
+      })
+      .catch(err => console.log(err))
   }
 
  
@@ -156,6 +158,7 @@ class App extends React.Component {
 
   render() {
     const { isHovering, searchmovie} = this.state;
+
     return (
       <div className="App">
         {/*
