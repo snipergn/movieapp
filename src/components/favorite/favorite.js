@@ -30,7 +30,7 @@ class Favorite extends React.Component {
   };
 
   render() {
-    console.log(this.state.favoriteList)
+    
     const { favoriteList } = this.state;
     return (
       <div>

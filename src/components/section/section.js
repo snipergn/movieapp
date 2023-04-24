@@ -30,7 +30,7 @@ const Section = ({
                   <div className="card h-100">
                     <img
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                      className="img-fluid width: 100%"
+                      className="img-fluid img-fluid-transition width: 100%"
                       alt="img"
                       onClick={() => OnActive(item.id)}
                     />
@@ -50,7 +50,7 @@ const Section = ({
               <div className="card h-100">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                  className="img-fluid"
+                  className="img-fluid img-fluid-transition"
                   alt="img"
                   onClick={() => OnActive(item.id)}
                 />
@@ -69,7 +69,7 @@ const Section = ({
               <div className="card h-100">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                  className="img-fluid"
+                  className="img-fluid img-fluid-transition"
                   alt="img"
                   onClick={() => OnActive(item.id)}
                 />
@@ -87,7 +87,7 @@ const Section = ({
               <div className="card h-100">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                  className="img-fluid"
+                  className="img-fluid img-fluid-transition"
                   alt="img"
                   onClick={() => OnActive(item.id)}
                 />

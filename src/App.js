@@ -92,7 +92,8 @@ class App extends React.Component {
  
   addToFavoriteQuery = (id) => {
     const queryItems = this.state.querymovie.find((item) => item.id === id);
-    if(!this.state.favoriteList.some(fav => fav.id === id)) {
+    const itemFilter = this.state.favoriteList.some(fav => fav.id === id)
+    if(!itemFilter) {
       this.setState({
         favoriteList: [...this.state.favoriteList, queryItems],
       });
@@ -121,6 +122,11 @@ class App extends React.Component {
 
   handleRedirect = () => {
     localStorage.setItem("favorite", JSON.stringify(this.state.favoriteList));
+  };
+  
+  removeFavorite = (id) => {
+    const hapus = this.state.favoriteList.filter((item) => item.id !== id);
+    this.setState({ favoriteList: hapus });
   };
 
   handleClickOver = () => {
@@ -158,7 +164,6 @@ class App extends React.Component {
 
   render() {
     const { isHovering, searchmovie} = this.state;
-
     return (
       <div className="App">
         {/*
@@ -194,6 +199,7 @@ class App extends React.Component {
                 MovieDetails={this.state.movieDetails}
                 favorite={this.addToFavoriteDetails}
                 videoAddress = {this.state.videoAddress}
+                favoriteList={this.state.favoriteList}
                 />
               <Footer />
             </div>
@@ -213,7 +219,9 @@ class App extends React.Component {
                         isHovering={this.state.isHovering}
                       />
                       <Header 
-                        movielatest={this.state.popularmovies} 
+                        movielatest={this.state.popularmovies}
+                        favorite={this.addToFavoriteDetails} 
+                        OnActive={this.ViewDetailsStateOpen}
                       />
                       <Section
                         movielatest={this.state.popularmovies}
@@ -230,6 +238,8 @@ class App extends React.Component {
                         MovieDetails={this.state.movieDetails}
                         favorite={this.addToFavoriteDetails}
                         videoAddress = {this.state.videoAddress}
+                        favoriteList={this.state.favoriteList}
+                        removeFavorite = {this.removeFavorite}
                       />
                       <Footer />
                     </div>
@@ -257,6 +267,8 @@ class App extends React.Component {
                         MovieDetails={this.state.movieDetails}
                         favorite={this.addToFavoriteDetails}
                         videoAddress = {this.state.videoAddress}
+                        favoriteList={this.state.favoriteList}
+                        removeFavorite = {this.removeFavorite}
                       />
                       <Footer />
                     </div>

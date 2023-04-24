@@ -9,13 +9,20 @@ const Details = ({
   MovieDetails,
   favorite,
   videoAddress,
+  favoriteList,
+  removeFavorite,
 }) => {
-  const itemResults = videoAddress[0]
+  const itemResultsOne = videoAddress[0];
+  const itemResultsTwo = videoAddress[1];
+  const itemResultsTree = videoAddress[2];
+
   return (
     <div>
       {showModal &&
         MovieDetails?.map((item) => {
-          const itemRound = Math.round(item.popularity);
+          const itemRound = Math.round(item.popularity/100);
+          const favorites = favoriteList.some(fav => fav.id === item.id)
+
           return (
             <Modal
               show={showModal}
@@ -28,7 +35,7 @@ const Details = ({
               <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                   <img
-                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
                     className="img-fluid width: 100% modal-header-image"
                     alt="header-thumbnail"
                   />
@@ -58,30 +65,82 @@ const Details = ({
                   </p>
                 )}
                 <div>
-                <h1>Trailer 1</h1>
-                { itemResults &&
-                  <iframe
-                    width="770"
-                    height="480"
-                    src={`https://www.youtube.com/embed/${itemResults.id}`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title="Embedded youtube"
-                  />
-                }
+                  <hr />
+                  <div className="FirstVideo mt-5">
+                    <h3 className="mb-3">Trailer 1</h3>
+                    {itemResultsOne ? (
+                      <iframe
+                        title="Youtube video"
+                        width="770"
+                        height="480"
+                        src={`https://www.youtube.com/embed/${itemResultsOne.key}`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <h1>Loading</h1>
+                    )}
+                  </div>
+                  <hr />
+                  <div className="FirstVideo mt-4">
+                    <h3 className="mb-3">Trailer 2</h3>
+                    {itemResultsTwo ? (
+                      <iframe
+                        title="Youtube video"
+                        width="770"
+                        height="480"
+                        src={`https://www.youtube.com/embed/${itemResultsTwo.key}`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <h1>Loading</h1>
+                    )}
+                  </div>
+                  <hr />
+                  <div className="FirstVideo mt-4">
+                    <h3 className="mb-3">Trailer 3</h3>
+                    {itemResultsTree ? (
+                      <iframe
+                        title="Youtube video"
+                        width="770"
+                        height="480"
+                        src={`https://www.youtube.com/embed/${itemResultsTree.key}`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <h1>Loading</h1>
+                    )}
+                  </div>
                 </div>
               </Modal.Body>
-              <Modal.Footer>
+              {!favorites  
+              ? <Modal.Footer>
                 <Button
                   className={"btn btn-primary button"}
                   onClick={() => favorite(item.id)}
                 >
                   Add to Favorite
                 </Button>
-                <Button className={"btn btn-secondary button"} onClick={OnHide}>
+                <Button className={"btn btn-secondary button"} 
+                onClick={OnHide}>
                   Close
                 </Button>
               </Modal.Footer>
+              : <Modal.Footer>
+              <Button
+                  className={"btn btn-danger button"}
+                  onClick={() => removeFavorite(item.id)}
+                >
+                  Remove from Favorite
+                </Button>
+                <Button className={"btn btn-secondary button"} 
+                onClick={OnHide}>
+                  Close
+                </Button>
+              </Modal.Footer>
+              }
             </Modal>
           );
         })}

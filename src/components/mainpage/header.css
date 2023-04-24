@@ -3,10 +3,14 @@
     width: 100%;
     object-fit: cover;
     height: 100%;
-    filter:brightness(40%); /* You can try with filter to give darkness to each image */
-
+    filter:brightness(40%); /*
+ You can try with filter to give darkness to each image */
+    background-color: black, 0.3;
 }
 .carousel-caption {
     padding-bottom: 10rem;
+}
+.display-block {
+    width: 650px;
 }
 
