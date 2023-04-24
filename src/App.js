@@ -59,7 +59,8 @@ class App extends React.Component {
       });
       this.setState({
         upcomingmovies: data[4].results,
-      });
+      })
+      .catch(err => console.log(err));
     });
   };
 
@@ -72,7 +73,8 @@ class App extends React.Component {
         this.setState({
           movieDetails: [data],
         });
-      });
+      })
+      .catch(err => console.log(err));
   };
 
   MovieVideoAddress = (id) => {
@@ -119,7 +121,6 @@ class App extends React.Component {
     
     this.handleRedirect();
   }
-
   handleRedirect = () => {
     localStorage.setItem("favorite", JSON.stringify(this.state.favoriteList));
   };
@@ -163,7 +164,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { isHovering, searchmovie} = this.state;
+    const { isHovering} = this.state;
     return (
       <div className="App">
         {/*
@@ -177,7 +178,7 @@ class App extends React.Component {
       */}
 
         <BrowserRouter>
-          {isHovering && searchmovie.length > 4 ? (
+          {isHovering ? (
             <div>
               <Navbar
                 searchmovievalue={this.state.searchmovie}
@@ -200,6 +201,7 @@ class App extends React.Component {
                 favorite={this.addToFavoriteDetails}
                 videoAddress = {this.state.videoAddress}
                 favoriteList={this.state.favoriteList}
+                removeFavorite = {this.removeFavorite}
                 />
               <Footer />
             </div>

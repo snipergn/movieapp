@@ -22,7 +22,7 @@ const Header = ({ movielatest, OnActive}) => {
                 <div class="carousel-caption d-none mb-5 d-md-block text-left">
                 <h6>Movie</h6>
                   <h1 className="mb-4">{item.results[0].title}</h1>
-                  <p className="display-block">{item.results[0].overview}</p><br/>
+                  <p className="display-block-ove">{item.results[0].overview}</p><br/>
                   
                   <button type="button" 
                   onClick={() => OnActive(item.results[0].id)}
@@ -39,7 +39,7 @@ const Header = ({ movielatest, OnActive}) => {
                  <div class="carousel-caption d-none mb-5 d-md-block text-left">
                   <h6>Movie</h6>
                   <h1 className="mb-4">{item.results[1].title}</h1>
-                  <p className="display-block">{item.results[1].overview}</p><br/>
+                  <p className="display-block-ove">{item.results[1].overview}</p><br/>
                   <button type="button" 
                   onClick={() => OnActive(item.results[1].id)} 
                   class="btn-lg btn-primarymt-2 ml-3">View More</button>
@@ -55,7 +55,7 @@ const Header = ({ movielatest, OnActive}) => {
                  <div class="carousel-caption d-none mb-5 d-md-block text-left">
                  <h6>Movie</h6>
                   <h1 className="mb-4">{item.results[2].title}</h1>
-                  <p className="display-block">{item.results[2].overview}</p><br/>
+                  <p className="display-block-ove">{item.results[2].overview}</p><br/>
                  
                   <button type="button"
                   onClick={() => OnActive(item.results[2].id)} class="btn-lg btn-primary mt-2 ml-3">View More</button>
@@ -64,13 +64,13 @@ const Header = ({ movielatest, OnActive}) => {
               <div class="carousel-item">
                 <img
                   class="d-block w-100 w-100 image img-responsive"
-                  src={`https://image.tmdb.org/t/p/original/${item.results[3].poster_path}`}
+                  src={`https://image.tmdb.org/t/p/original/${item.results[3].backdrop_path}`}
                   alt="Fourth slide"
                 />
                  <div class="carousel-caption d-none mb-5 d-md-block text-left">
                  <h6>Movie</h6>
                   <h1 className="mb-4">{item.results[3].title}</h1>
-                  <p className="display-block">{item.results[3].overview}</p><br/>
+                  <p className="display-block-ove">{item.results[3].overview}</p><br/>
                   
                   <button type="button" 
                   onClick={() => OnActive(item.results[3].id)} class="btn-lg btn-primary mt-2 ml-3">View More</button>

@@ -66,8 +66,8 @@ const Details = ({
                 )}
                 <div>
                   <hr />
-                  <div className="FirstVideo mt-5">
-                    <h3 className="mb-3">Trailer 1</h3>
+                  <div className="FirstVideo mt-1">
+                    <h3 className="mb-3 videosOut">Videos 1</h3>
                     {itemResultsOne ? (
                       <iframe
                         title="Youtube video"
@@ -83,7 +83,7 @@ const Details = ({
                   </div>
                   <hr />
                   <div className="FirstVideo mt-4">
-                    <h3 className="mb-3">Trailer 2</h3>
+                    <h3 className="mb-3 videosOut">Video 2</h3>
                     {itemResultsTwo ? (
                       <iframe
                         title="Youtube video"
@@ -99,7 +99,7 @@ const Details = ({
                   </div>
                   <hr />
                   <div className="FirstVideo mt-4">
-                    <h3 className="mb-3">Trailer 3</h3>
+                    <h3 className="mb-3 videosOut">Video 3</h3>
                     {itemResultsTree ? (
                       <iframe
                         title="Youtube video"
