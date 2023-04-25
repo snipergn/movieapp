@@ -10,19 +10,16 @@ const Details = ({
   favorite,
   videoAddress,
   favoriteList,
-  removeFavorite,
 }) => {
   const itemResultsOne = videoAddress[0];
   const itemResultsTwo = videoAddress[1];
   const itemResultsTree = videoAddress[2];
-
   return (
     <div>
       {showModal &&
         MovieDetails?.map((item) => {
-          const itemRound = Math.round(item.popularity/100);
-          const favorites = favoriteList.some(fav => fav.id === item.id)
-
+          const itemRound = Math.round(item.popularity / 100);
+          const favorites = favoriteList.some((fav) => fav.id === item.id);
           return (
             <Modal
               show={showModal}
@@ -115,32 +112,17 @@ const Details = ({
                   </div>
                 </div>
               </Modal.Body>
-              {!favorites  
-              ? <Modal.Footer>
+              <Modal.Footer>
                 <Button
                   className={"btn btn-primary button"}
                   onClick={() => favorite(item.id)}
                 >
                   Add to Favorite
                 </Button>
-                <Button className={"btn btn-secondary button"} 
-                onClick={OnHide}>
+                <Button className={"btn btn-secondary button"} onClick={OnHide}>
                   Close
                 </Button>
               </Modal.Footer>
-              : <Modal.Footer>
-              <Button
-                  className={"btn btn-danger button"}
-                  onClick={() => removeFavorite(item.id)}
-                >
-                  Remove from Favorite
-                </Button>
-                <Button className={"btn btn-secondary button"} 
-                onClick={OnHide}>
-                  Close
-                </Button>
-              </Modal.Footer>
-              }
             </Modal>
           );
         })}

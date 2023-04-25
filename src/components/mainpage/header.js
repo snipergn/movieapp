@@ -4,7 +4,6 @@ const Header = ({ movielatest, OnActive}) => {
   return (
     <div>
       {movielatest.map((item, index) => {
-        console.log(item.results[0])
         return (
           <div key={index}
             id="carouselExampleControls"

@@ -125,11 +125,7 @@ class App extends React.Component {
     localStorage.setItem("favorite", JSON.stringify(this.state.favoriteList));
   };
   
-  removeFavorite = (id) => {
-    const hapus = this.state.favoriteList.filter((item) => item.id !== id);
-    this.setState({ favoriteList: hapus });
-  };
-
+  
   handleClickOver = () => {
     setTimeout(() => {
       this.setState(() => ({
@@ -165,6 +161,7 @@ class App extends React.Component {
 
   render() {
     const { isHovering} = this.state;
+    console.log(this.state.favoriteList)
     return (
       <div className="App">
         {/*
@@ -178,6 +175,7 @@ class App extends React.Component {
       */}
 
         <BrowserRouter>
+        
           {isHovering ? (
             <div>
               <Navbar
@@ -201,7 +199,7 @@ class App extends React.Component {
                 favorite={this.addToFavoriteDetails}
                 videoAddress = {this.state.videoAddress}
                 favoriteList={this.state.favoriteList}
-                removeFavorite = {this.removeFavorite}
+                deleteToFavorite={this.props.deleteToFavorite}
                 />
               <Footer />
             </div>
@@ -241,7 +239,7 @@ class App extends React.Component {
                         favorite={this.addToFavoriteDetails}
                         videoAddress = {this.state.videoAddress}
                         favoriteList={this.state.favoriteList}
-                        removeFavorite = {this.removeFavorite}
+                        deleteToFavorite={this.props.deleteToFavorite}
                       />
                       <Footer />
                     </div>
@@ -270,7 +268,7 @@ class App extends React.Component {
                         favorite={this.addToFavoriteDetails}
                         videoAddress = {this.state.videoAddress}
                         favoriteList={this.state.favoriteList}
-                        removeFavorite = {this.removeFavorite}
+                        deleteToFavorite={this.props.deleteToFavorite}
                       />
                       <Footer />
                     </div>

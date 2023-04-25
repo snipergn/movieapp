@@ -32,7 +32,9 @@ class Favorite extends React.Component {
   render() {
     
     const { favoriteList } = this.state;
+    console.log(favoriteList)
     return (
+      
       <div>
         <div className="mt-2 ml-5 mr-5">
         {/* FAVORITE MOVIES SECTION */}
@@ -47,22 +49,25 @@ class Favorite extends React.Component {
                       src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
                       className="img-fluid"
                       alt="img"
-                      onClick={() => this.props.OnFavorite(item.id)}
                     />
                       : <img
                       src={Noimage}
                       className="img-fluid"
-                      alt="img"
-                      onClick={() => this.props.OnActive(item.id)}
+                      alt="img"   
                     />
                     }
+                  <button type="button" 
+                  onClick={() => this.deleteToFavorite(item.id)} 
+                  class="btn btn-danger mt-2">Remove from Favorites</button>
                 </div>
               </div>
             );
           })}
         </div>
         </div>
+        
       </div>
+      
     );
   }
 }
