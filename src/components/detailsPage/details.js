@@ -9,7 +9,6 @@ const Details = ({
   MovieDetails,
   favorite,
   videoAddress,
-  favoriteList,
 }) => {
   const itemResultsOne = videoAddress[0];
   const itemResultsTwo = videoAddress[1];
@@ -19,7 +18,6 @@ const Details = ({
       {showModal &&
         MovieDetails?.map((item) => {
           const itemRound = Math.round(item.popularity / 100);
-          const favorites = favoriteList.some((fav) => fav.id === item.id);
           return (
             <Modal
               show={showModal}
@@ -68,7 +66,7 @@ const Details = ({
                     {itemResultsOne ? (
                       <iframe
                         title="Youtube video"
-                        width="770"
+                        width="100%"
                         height="480"
                         src={`https://www.youtube.com/embed/${itemResultsOne.key}`}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -84,7 +82,7 @@ const Details = ({
                     {itemResultsTwo ? (
                       <iframe
                         title="Youtube video"
-                        width="770"
+                        width="100%"
                         height="480"
                         src={`https://www.youtube.com/embed/${itemResultsTwo.key}`}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -100,7 +98,7 @@ const Details = ({
                     {itemResultsTree ? (
                       <iframe
                         title="Youtube video"
-                        width="770"
+                        width="100%"
                         height="480"
                         src={`https://www.youtube.com/embed/${itemResultsTree.key}`}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

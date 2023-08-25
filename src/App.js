@@ -24,11 +24,14 @@ class App extends React.Component {
       movieDetails: [],
       videoAddress: [],
       isHovering: false,
-      isDetails: false
+      isDetails: false,
+      route: "signin", 
+      isSignedin: false
     };
     this.handleClickOver = this.handleClickOver.bind(this);
     this.handleClickOut = this.handleClickOut.bind(this);
   }
+  
   handleHeader = (data) => {
     const api = "399de7528a6f7ce137d42429f7513ad0";
     const urls = [
@@ -60,7 +63,6 @@ class App extends React.Component {
       this.setState({
         upcomingmovies: data[4].results,
       })
-      .catch(err => console.log(err));
     });
   };
 
@@ -164,18 +166,7 @@ class App extends React.Component {
     console.log(this.state.favoriteList)
     return (
       <div className="App">
-        {/*
-      2. Backend
-        -> Crypt Data with Hash (Bycrypt)
-        -> GET user details from frontend
-        -> POST register details from frotnend
-        -> PUT -> When My list Add an object
-        -> DELETE -> When remove an item from my list of movies.
-      3. Database ?? (yet)
-      */}
-
         <BrowserRouter>
-        
           {isHovering ? (
             <div>
               <Navbar
@@ -206,6 +197,8 @@ class App extends React.Component {
           ) : (
             <Routes>
               <>
+              
+              
                 <Route
                   exact
                   path={"/"}
@@ -274,9 +267,10 @@ class App extends React.Component {
                     </div>
                   }
                 />
+                <Route exact path="/signin" element={<Signin />} />
+                <Route exact path="/register" element={<Register />} />
               </>
-              <Route exact path="/signin" element={<Signin />} />
-              <Route exact path="/register" element={<Register />} />
+              
             </Routes>
           )}
         </BrowserRouter>
