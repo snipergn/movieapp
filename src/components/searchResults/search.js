@@ -20,6 +20,7 @@ const SearchMovies = ({queryMovies, OnSearching}) => {
                       className="img-fluid"
                       alt="img"
                       onClick={() => OnSearching(item.id)}
+                
                     />
                       : <img
                       src={Noimage}
